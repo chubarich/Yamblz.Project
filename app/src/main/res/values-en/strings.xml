@@ -1,38 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="navigation_drawer_open">Open Navigation Drawer</string>
-    <string name="navigation_drawer_close">Close Navigation Drawer</string>
-
-    <!--Navigation drawer strings-->
-    <string name="navigation_weather_text">Weather</string>
-    <string name="navigation_settings_text">Settings</string>
-    <string name="navigation_about_text">About app</string>
-
-    <!--AboutFragment strings-->
-    <string name="text_about_app">This training application is developed in the project \"Mobilization\"</string>
-    <string name="settings_placeholder_text">Settings screen</string>
-    <string name="weather_placeholder_text">Weather coming soon :)</string>
-
-    <!--Preferences-->
-    <string name="pref_update_time_title">Update frequency</string>
-    <string-array name="pref_update_time_entries">
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>12 hours</item>
-        <item>24 hours</item>
-    </string-array>
-
-    <!--WeatherFragment-->
-    <string name="pressure_measure_unit">hpa</string>
-    <string name="temp_measure_unit">°F</string>
-    <string name="weather_fragment_humidity">Humidity</string>
-    <string name="weather_fragment_pressure">Pressure</string>
-    <string name="weather_fragment_temp">Temperature</string>
-    <string name="weather_fragment_today">Today</string>
-    <string name="navigation_city_selection">City selection</string>
-    <string name="enter_city_name">Enter city name</string>
-    <string name="no_cities_found">Did not match any cities</string>
-    <string name="error_no_data">Не удалось получить данные</string>
-    <string name="default_city_name">Moscow</string>
-    <string name="pref_city_title">City</string>
+    <string name="default_city_name">Москва</string>
 </resources>

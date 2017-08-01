@@ -1,0 +1,35 @@
+<resources>
+    <string name="enter_city_name">Введите название города</string>
+    <string name="no_cities_found">Не найдено ни одного города</string>
+    <string name="error_no_data">Не удалось получить данные</string>
+
+    <string name="pref_update_time_title">Частота обновлений</string>
+    <string name="pref_city_title">Город</string>
+    <string-array name="pref_update_time_entries">
+        <item>1 час</item>
+        <item>3 часа</item>
+        <item>6 часов</item>
+        <item>12 часов</item>
+        <item>24 часа</item>
+    </string-array>
+
+    <!--navigation drawer-->
+    <string name="navigation_weather_text">Погода</string>
+    <string name="navigation_settings_text">Настройки</string>
+    <string name="navigation_about_text">О приложении</string>
+    <string name="navigation_city_selection">Выбор города</string>
+    <string name="navigation_drawer_open">Открыть боковое меню</string>
+    <string name="navigation_drawer_close">Закрыть боковое меню</string>
+
+    <!--AboutFragment-->
+    <string name="text_about_app">
+        Это учебное приложение разрабатываемое в рамках проекта \"Мобилизация\"
+    </string>
+
+    <string name="weather_fragment_today">Сегодня</string>
+    <string name="weather_fragment_temp">Температура</string>
+    <string name="weather_fragment_pressure">Давление</string>
+    <string name="weather_fragment_humidity">Влажность</string>
+    <string name="pressure_measure_unit">мм. рт. ст.</string>
+    <string name="temp_measure_unit">°C</string>
+</resources>
