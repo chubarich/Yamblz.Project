@@ -22,10 +22,12 @@ public class WeatherRepositoryImpl implements WeatherRepository {
     }
 
     private Single<WeatherDataModel> loadFromNetwork() {
-        return preferenceHelper.getCity()
-                .flatMap(city -> networkHelper.loadWeather(city.getId()))
-                .map(WeatherDataModel::valueOf)
-                .doOnSuccess(dataModel -> preferenceHelper.saveWeather(dataModel).subscribe());
+        //todo
+//        return preferenceHelper.getCity()
+//                .flatMap(city -> networkHelper.loadWeather(city.getId()))
+//                .map(WeatherDataModel::valueOf)
+//                .doOnSuccess(dataModel -> preferenceHelper.saveWeather(dataModel).subscribe());
+        return Single.never();
     }
 
     private Single<WeatherDataModel> loadCachedWeather() {

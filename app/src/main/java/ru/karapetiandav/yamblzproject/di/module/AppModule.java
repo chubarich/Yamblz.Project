@@ -13,7 +13,6 @@ import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 import ru.karapetiandav.yamblzproject.data.prefs.PreferenceHelper;
 import ru.karapetiandav.yamblzproject.data.prefs.PreferenceHelperImpl;
-import ru.karapetiandav.yamblzproject.utils.LanguageUtils;
 import ru.karapetiandav.yamblzproject.utils.Utils;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulersImpl;
@@ -52,13 +51,6 @@ public class AppModule {
     @NonNull
     CompositeDisposable provideCompositeDisposable() {
         return new CompositeDisposable();
-    }
-
-    @Provides
-    @Singleton
-    @NonNull
-    LanguageUtils provideLanguageUtils() {
-        return new LanguageUtils();
     }
 
     @Provides

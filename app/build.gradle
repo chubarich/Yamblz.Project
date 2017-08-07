@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     signingConfigs {
         config {
@@ -26,6 +30,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
+    }
+    buildTypes.each {
+        it.buildConfigField 'String', 'OPEN_WEATHER_MAP_API_KEY',
+                keystoreProperties['OpenWeatherMapApiKey']
+        it.buildConfigField 'String', 'GOOGLE_PLACES_API_KEY',
+                keystoreProperties['GooglePlacesApiKey']
     }
 
     compileOptions {
@@ -64,6 +74,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
 
     // Android Job
     compile 'com.evernote:android-job:1.1.11'
@@ -73,5 +84,5 @@ dependencies {
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
 
 //    db
-    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
+    compile 'nl.qbusict:cupboard:2.2.0'
 }

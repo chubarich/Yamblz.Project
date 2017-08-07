@@ -3,9 +3,9 @@ package ru.karapetiandav.yamblzproject.data.model;
 
 import java.util.Date;
 
-import ru.karapetiandav.yamblzproject.data.network.model.Main;
-import ru.karapetiandav.yamblzproject.data.network.model.Weather;
-import ru.karapetiandav.yamblzproject.data.network.model.WeatherResponse;
+import ru.karapetiandav.yamblzproject.data.network.model.weather.Main;
+import ru.karapetiandav.yamblzproject.data.network.model.weather.Weather;
+import ru.karapetiandav.yamblzproject.data.network.model.weather.WeatherResponse;
 
 public class WeatherDataModel {
 

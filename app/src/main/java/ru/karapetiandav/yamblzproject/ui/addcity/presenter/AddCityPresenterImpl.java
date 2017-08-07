@@ -5,16 +5,21 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import ru.karapetiandav.yamblzproject.business.addcity.interactor.AddCityInteractor;
 import ru.karapetiandav.yamblzproject.ui.addcity.model.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.addcity.view.AddCityView;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;
 
 public class AddCityPresenterImpl implements AddCityPresenter<AddCityView> {
+
+    private final static int DEBOUNCE_BEFORE_QUERING_DATA = 500;
 
     private AddCityInteractor addCityInteractor;
     private CompositeDisposable compositeDisposable;
@@ -50,11 +55,13 @@ public class AddCityPresenterImpl implements AddCityPresenter<AddCityView> {
     public void observeInputChanges(Observable<CharSequence> inputChanges) {
         Disposable disposable = inputChanges
                 .map(CharSequence::toString)
-                .observeOn(schedulers.getMainThreadScheduler())
                 .doOnNext(this::handleText)
-                .filter(s -> !s.isEmpty())
+                .debounce(DEBOUNCE_BEFORE_QUERING_DATA, TimeUnit.MILLISECONDS)
                 .observeOn(schedulers.getIOScheduler())
                 .flatMap(addCityInteractor::getCitiesMatches)
+                .observeOn(schedulers.getMainThreadScheduler())
+                .doAfterNext(ignore -> view.hideProgress())
+                .doAfterTerminate(view::hideProgress)
                 .subscribeOn(schedulers.getIOScheduler())
                 .observeOn(schedulers.getMainThreadScheduler())
                 .subscribe(this::handleNext, this::handleError);
@@ -64,13 +71,15 @@ public class AddCityPresenterImpl implements AddCityPresenter<AddCityView> {
     private void handleText(String text) {
         if (text.equals("")) {
             view.showCities(new ArrayList<>());
-            return;
+            view.hideProgress();
+        } else {
+            view.showProgress();
         }
         cache.setLastText(text);
     }
 
     private void handleNext(@NonNull List<CityViewModel> cities) {
-        if (!cities.isEmpty() && !cache.getLastText().equals("")) {
+        if (!cities.isEmpty() || cache.getLastText().equals("")) {
             view.showCities(cities);
         } else {
             view.showNoMatches();
@@ -84,7 +93,10 @@ public class AddCityPresenterImpl implements AddCityPresenter<AddCityView> {
 
     @Override
     public void onCityClick(@NonNull CityViewModel city) {
-        addCityInteractor.saveCity(city).subscribe(view::close);
+        addCityInteractor.chooseCity(city)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(view::close, Throwable::printStackTrace);
     }
 
     @Override

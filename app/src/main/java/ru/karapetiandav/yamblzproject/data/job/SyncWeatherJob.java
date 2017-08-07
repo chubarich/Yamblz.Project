@@ -8,7 +8,6 @@ import com.evernote.android.job.JobRequest;
 
 import java.util.concurrent.TimeUnit;
 
-import ru.karapetiandav.yamblzproject.data.model.WeatherDataModel;
 import ru.karapetiandav.yamblzproject.data.network.NetworkHelper;
 import ru.karapetiandav.yamblzproject.data.prefs.PreferenceHelper;
 
@@ -39,11 +38,12 @@ public class SyncWeatherJob extends Job {
     @NonNull
     @Override
     protected Result onRunJob(Params params) {
-        preferenceHelper.getCity()
-                .flatMap(city -> networkHelper.loadWeather(city.getId()))
-                .map(WeatherDataModel::valueOf)
-                .doOnSuccess(preferenceHelper::saveWeather)
-                .subscribe();
+        //todo return
+//        preferenceHelper.getCity()
+//                .flatMap(city -> networkHelper.loadWeather(city.getId()))
+//                .map(WeatherDataModel::valueOf)
+//                .doOnSuccess(preferenceHelper::saveWeather)
+//                .subscribe();
         return Result.SUCCESS;
     }
 }

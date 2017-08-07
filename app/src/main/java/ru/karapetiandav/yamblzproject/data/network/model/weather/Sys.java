@@ -1,5 +1,5 @@
 
-package ru.karapetiandav.yamblzproject.data.network.model;
+package ru.karapetiandav.yamblzproject.data.network.model.weather;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

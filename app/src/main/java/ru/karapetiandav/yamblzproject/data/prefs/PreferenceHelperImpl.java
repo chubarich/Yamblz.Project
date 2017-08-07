@@ -7,7 +7,6 @@ import android.util.Log;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
-import ru.karapetiandav.yamblzproject.R;
 import ru.karapetiandav.yamblzproject.data.exceptions.NoCachedWeatherException;
 import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
 import ru.karapetiandav.yamblzproject.data.model.WeatherDataModel;
@@ -30,22 +29,24 @@ public class PreferenceHelperImpl implements PreferenceHelper {
 
     @Override
     public Completable saveCity(CityDataModel city) {
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putInt(resources.getString(R.string.city_id_key), city.getId());
-        editor.putString(resources.getString(R.string.city_name_key), city.getCityName());
-        editor.putString(resources.getString(R.string.country_key), city.getCountryCode());
-        editor.apply();
+        //todo return
+//        SharedPreferences.Editor editor = sharedPrefs.edit();
+//        editor.putInt(resources.getString(R.string.city_id_key), city.getId());
+//        editor.putString(resources.getString(R.string.city_name_key), city.getCity());
+//        editor.putString(resources.getString(R.string.country_key), city.getCountry());
+//        editor.apply();
         return Completable.complete();
     }
 
     @Override
     public Single<CityDataModel> getCity() {
-        CityDataModel cityDataModel = new CityDataModel(
-                sharedPrefs.getInt(resources.getString(R.string.city_id_key), resources.getInteger(R.integer.default_city_id)),
-                sharedPrefs.getString(resources.getString(R.string.city_name_key), resources.getString(R.string.default_city_name)),
-                sharedPrefs.getString(resources.getString(R.string.country_key), resources.getString(R.string.default_country))
-        );
-        return Single.fromCallable(() -> cityDataModel);
+        //todo return too
+//        CityDataModel cityDataModel = new CityDataModel(
+//                sharedPrefs.getInt(resources.getString(R.string.city_id_key), resources.getInteger(R.integer.default_city_id)),
+//                sharedPrefs.getString(resources.getString(R.string.city_name_key), resources.getString(R.string.default_city_name)),
+//                sharedPrefs.getString(resources.getString(R.string.country_key), resources.getString(R.string.default_country))
+//        );
+        return Single.never();
     }
 
     @Override

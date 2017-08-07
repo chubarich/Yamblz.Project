@@ -1,33 +1,38 @@
 package ru.karapetiandav.yamblzproject.data.repositories.addcity;
 
-
 import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import ru.karapetiandav.yamblzproject.data.db.DBHelper;
 import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
-import ru.karapetiandav.yamblzproject.data.model.Language;
-import ru.karapetiandav.yamblzproject.data.prefs.PreferenceHelper;
+import ru.karapetiandav.yamblzproject.data.network.NetworkHelper;
+import ru.karapetiandav.yamblzproject.utils.mappers.CityMapper;
 
 public class AddCityRepositoryImpl implements AddCityRepository {
 
     private DBHelper dbHelper;
-    private PreferenceHelper preferenceHelper;
+    private NetworkHelper networkHelper;
+    private CityMapper mapper;
 
-    public AddCityRepositoryImpl(DBHelper dbHelper, PreferenceHelper preferenceHelper) {
+    public AddCityRepositoryImpl(NetworkHelper networkHelper,
+                                 DBHelper dbHelper, CityMapper mapper) {
+        this.networkHelper = networkHelper;
         this.dbHelper = dbHelper;
-        this.preferenceHelper = preferenceHelper;
+        this.mapper = mapper;
     }
 
     @Override
-    public Single<List<CityDataModel>> getCitiesMatches(String text, Language language) {
-        return dbHelper.getCities(text, language);
+    public Single<List<CityDataModel>> getCitiesMatches(String text) {
+        //todo здесь посылаем конкретные ошибки
+        return networkHelper.getCities(text)
+                .map(cityResponse -> mapper.getCitiesFromResponse(cityResponse));
     }
 
     @Override
-    public Completable saveCity(CityDataModel city) {
-        return preferenceHelper.saveCity(city)
-                .doOnComplete(() -> preferenceHelper.clearWeatherCache().subscribe());
+    public Completable chooseCity(CityDataModel cityDataModel) {
+        return Completable.fromSingle(networkHelper.getCityDetails(cityDataModel.getId())
+                .map(cityDetails -> mapper.getCityDataModelWithCoords(cityDataModel, cityDetails))
+                .doOnSuccess(dbHelper::saveCity));
     }
 }

@@ -1,41 +1,42 @@
 package ru.karapetiandav.yamblzproject.data.model;
 
 
-public final class CityDataModel {
+public class CityDataModel {
 
-    private final int id;
-    private final String name;
-    private final String country;
+    private String id;
+    private String city;
+    private String country;
+    private float lat;
+    private float lon;
 
-
-    public CityDataModel(int cityId, String cityName, String countryCode) {
-        this.id = cityId;
-        this.name = cityName;
-        this.country = countryCode;
+    public CityDataModel() {
     }
 
-    public int getId() {
+    public CityDataModel(String id, String city, String country, float lat, float lon) {
+        this.id = id;
+        this.city = city;
+        this.country = country;
+        this.lat = lat;
+        this.lon = lon;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public String getCityName() {
-        return name;
+    public String getCity() {
+        return city;
     }
 
-    public String getCountryCode() {
+    public String getCountry() {
         return country;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public float getLat() {
+        return lat;
+    }
 
-        CityDataModel dataModel = (CityDataModel) o;
-
-        if (id != dataModel.id) return false;
-        if (name != null ? !name.equals(dataModel.name) : dataModel.name != null) return false;
-        return country != null ? country.equals(dataModel.country) : dataModel.country == null;
-
+    public float getLon() {
+        return lon;
     }
 }

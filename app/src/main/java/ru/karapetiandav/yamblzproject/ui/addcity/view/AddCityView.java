@@ -10,4 +10,6 @@ public interface AddCityView {
     void showNoMatches();
     void showError();
     void close();
+    void showProgress();
+    void hideProgress();
 }

@@ -30,7 +30,9 @@ public class AddCityAdapter extends RecyclerView.Adapter<AddCityAdapter.CitiesVi
 
     @Override
     public void onBindViewHolder(CitiesViewHolder holder, int position) {
-        holder.cityTV.setText(cities.get(position).getCityInfo());
+        CityViewModel viewModel = cities.get(position);
+        //todo не разделять запятыми в маппере
+        holder.cityTV.setText(viewModel.getCityName() + ", " + viewModel.getCountry());
     }
 
     @Override

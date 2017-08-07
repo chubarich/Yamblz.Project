@@ -7,39 +7,36 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.karapetiandav.yamblzproject.R;
 import ru.karapetiandav.yamblzproject.data.network.NetworkHelper;
 import ru.karapetiandav.yamblzproject.data.network.NetworkHelperImpl;
-import ru.karapetiandav.yamblzproject.di.qualifiers.ApiKey;
-import ru.karapetiandav.yamblzproject.di.qualifiers.ApiBaseUrl;
+import ru.karapetiandav.yamblzproject.data.network.api.CityApi;
+import ru.karapetiandav.yamblzproject.data.network.api.CityApiEndpoints;
 import ru.karapetiandav.yamblzproject.data.network.api.WeatherApi;
+import ru.karapetiandav.yamblzproject.di.qualifiers.WeatherApiBaseUrl;
 
 @Module
 public class NetworkModule {
 
-    @Provides
-    @Singleton
-    @NonNull
-    @ApiKey
-    String provideWeatherApiKey(Resources resources) {
-        return resources.getString(R.string.api_key);
-    }
 
     @Provides
     @Singleton
     @NonNull
-    @ApiBaseUrl
-    String provideBaseUrl(Resources resources) {
+    @WeatherApiBaseUrl
+    String provideWeatherBaseUrl(Resources resources) {
+//        todo убрать
         return resources.getString(R.string.api_base_url);
     }
 
     @Provides
     @Singleton
     @NonNull
-    WeatherApi provideWeatherApi(@ApiBaseUrl String baseUrl) {
+    WeatherApi provideWeatherApi(@WeatherApiBaseUrl String baseUrl) {
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -50,7 +47,24 @@ public class NetworkModule {
     @Provides
     @Singleton
     @NonNull
-    NetworkHelper provideNetworkHelper(WeatherApi weatherApi, @ApiKey String apikey) {
-        return new NetworkHelperImpl(weatherApi, apikey);
+    CityApi provideCityApi() {
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(CityApiEndpoints.BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
+        return builder.build().create(CityApi.class);
+    }
+
+    @Provides
+    @Singleton
+    @NonNull
+    NetworkHelper provideNetworkHelper(WeatherApi weatherApi, CityApi cityApi) {
+        return new NetworkHelperImpl(weatherApi, cityApi);
     }
 }

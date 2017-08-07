@@ -1,4 +1,4 @@
-package ru.karapetiandav.yamblzproject.ui.base.presenter;
+package ru.karapetiandav.yamblzproject.ui.base;
 
 
 public class BasePresenter<V> implements Presenter<V> {

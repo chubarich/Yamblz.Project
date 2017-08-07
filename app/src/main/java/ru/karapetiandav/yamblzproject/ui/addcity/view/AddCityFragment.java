@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -40,6 +41,7 @@ public class AddCityFragment extends Fragment implements AddCityView {
     @BindView(R.id.cities_recyclerview) RecyclerView recyclerView;
     @BindView(R.id.no_results_textview) TextView noResultsTV;
     @BindView(R.id.no_data_error_textview) TextView errorTV;
+    @BindView(R.id.loading_progressbar) ProgressBar progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +99,18 @@ public class AddCityFragment extends Fragment implements AddCityView {
         recyclerView.setVisibility(View.GONE);
         noResultsTV.setVisibility(View.GONE);
         errorTV.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showProgress() {
+        noResultsTV.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
