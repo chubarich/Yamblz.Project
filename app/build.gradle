@@ -85,4 +85,6 @@ dependencies {
 
 //    db
     compile 'nl.qbusict:cupboard:2.2.0'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

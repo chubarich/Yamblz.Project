@@ -16,8 +16,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.karapetiandav.yamblzproject.R;
 import ru.karapetiandav.yamblzproject.ui.about.AboutFragment;
+import ru.karapetiandav.yamblzproject.ui.cities.CitiesFragment;
 import ru.karapetiandav.yamblzproject.ui.settings.SettingsFragment;
-import ru.karapetiandav.yamblzproject.ui.weather.view.WeatherFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
             navigationView.setCheckedItem(R.id.nav_weather);
             setTitle(navigationView.getMenu().findItem(R.id.nav_weather).getTitle());
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, new WeatherFragment())
+                    .replace(R.id.container, new CitiesFragment())
                     .commit();
         }
     }
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_weather:
-                fragmentClass = WeatherFragment.class;
+                fragmentClass = CitiesFragment.class;
                 break;
             case R.id.nav_settings:
                 fragmentClass = SettingsFragment.class;

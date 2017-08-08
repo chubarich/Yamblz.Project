@@ -32,4 +32,6 @@
     <string name="weather_fragment_humidity">Влажность</string>
     <string name="pressure_measure_unit">мм. рт. ст.</string>
     <string name="temp_measure_unit">°C</string>
+    <string name="default_city_name">Москва</string>
+    <string name="no_city_added">Не добавлено ни одного города</string>
 </resources>

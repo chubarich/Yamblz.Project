@@ -12,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import ru.karapetiandav.yamblzproject.business.addcity.interactor.AddCityInteractor;
+import ru.karapetiandav.yamblzproject.business.addcity.AddCityInteractor;
 import ru.karapetiandav.yamblzproject.ui.addcity.model.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.addcity.view.AddCityView;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;

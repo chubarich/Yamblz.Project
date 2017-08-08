@@ -47,13 +47,13 @@ public class AddCityFragment extends Fragment implements AddCityView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        App.getAppComponent().plusCitiesComponent(new AddCityModule()).inject(this);
+        App.getAppComponent().plusAddCityComponent(new AddCityModule()).inject(this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cities, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_city, container, false);
         ButterKnife.bind(this, view);
         setupRecyclerView();
         presenter.onAttach(this);

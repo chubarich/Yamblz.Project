@@ -21,7 +21,7 @@ import ru.karapetiandav.yamblzproject.data.network.api.WeatherApi;
 import ru.karapetiandav.yamblzproject.di.qualifiers.WeatherApiBaseUrl;
 
 @Module
-public class NetworkModule {
+public class  NetworkModule {
 
 
     @Provides

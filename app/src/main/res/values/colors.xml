@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#FEDC5F</color>
+    <color name="colorPrimaryDark">#B19942</color>
+    <color name="colorAccent">#FFDD60</color>
+
+    <color name="color_sun">#FFEB3B</color>
+    <color name="color_hot">#FFC107</color>
+    <color name="color_clouds">#9E9E9E</color>
+    <color name="color_night">#607D8B</color>
+    <color name="color_rain">#2196F3</color>
 
 </resources>

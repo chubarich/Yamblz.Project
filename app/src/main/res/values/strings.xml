@@ -61,5 +61,6 @@
     <string name="enter_city_name">Enter city name</string>
     <string name="no_cities_found">Did not match any cities</string>
     <string name="error_no_data">Failed to retrieve data</string>
+    <string name="no_city_added">No city added</string>
 
 </resources>
