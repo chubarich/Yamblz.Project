@@ -7,10 +7,7 @@ import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 import ru.karapetiandav.yamblzproject.business.addcity.AddCityInteractor;
 import ru.karapetiandav.yamblzproject.business.addcity.AddCityInteractorImpl;
-import ru.karapetiandav.yamblzproject.data.db.DBHelper;
-import ru.karapetiandav.yamblzproject.data.network.NetworkHelper;
-import ru.karapetiandav.yamblzproject.data.repositories.addcity.AddCityRepository;
-import ru.karapetiandav.yamblzproject.data.repositories.addcity.AddCityRepositoryImpl;
+import ru.karapetiandav.yamblzproject.data.repositories.cities.CitiesRepository;
 import ru.karapetiandav.yamblzproject.di.scope.AddCityScope;
 import ru.karapetiandav.yamblzproject.ui.addcity.adapter.AddCityAdapter;
 import ru.karapetiandav.yamblzproject.ui.addcity.presenter.AddCityPresenter;
@@ -43,7 +40,7 @@ public class AddCityModule {
     @Provides
     @AddCityScope
     @NonNull
-    AddCityInteractor addCityInteractor(AddCityRepository repository, CityMapper mapper) {
+    AddCityInteractor addCityInteractor(CitiesRepository repository, CityMapper mapper) {
         return new AddCityInteractorImpl(repository, mapper);
     }
 
@@ -52,22 +49,6 @@ public class AddCityModule {
     @NonNull
     AddCityPresenterCache provideAddCityPresenterCache() {
         return new AddCityPresenterCache();
-    }
-
-    @Provides
-    @AddCityScope
-    @NonNull
-    AddCityRepository provideAddCityRepository(NetworkHelper networkHelper,
-                                               DBHelper dbHelper,
-                                               CityMapper mapper) {
-        return new AddCityRepositoryImpl(networkHelper, dbHelper, mapper);
-    }
-
-    @Provides
-    @AddCityScope
-    @NonNull
-    CityMapper provideCityMapper() {
-        return new CityMapper();
     }
 
 }

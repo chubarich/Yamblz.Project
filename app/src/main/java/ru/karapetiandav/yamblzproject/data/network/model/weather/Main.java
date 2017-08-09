@@ -8,27 +8,27 @@ public class Main {
 
     @SerializedName("temp")
     @Expose
-    private float temp;
+    private double temp;
     @SerializedName("pressure")
     @Expose
-    private float pressure;
+    private double pressure;
     @SerializedName("humidity")
     @Expose
     private int humidity;
     @SerializedName("temp_min")
     @Expose
-    private float tempMin;
+    private double tempMin;
     @SerializedName("temp_max")
     @Expose
-    private float tempMax;
+    private double tempMax;
     @SerializedName("sea_level")
     @Expose
-    private float seaLevel;
+    private double seaLevel;
     @SerializedName("grnd_level")
     @Expose
-    private float grndLevel;
+    private double grndLevel;
 
-    public float getTemp() {
+    public double getTemp() {
         return temp;
     }
 
@@ -36,7 +36,7 @@ public class Main {
         this.temp = temp;
     }
 
-    public float getPressure() {
+    public double getPressure() {
         return pressure;
     }
 
@@ -52,7 +52,7 @@ public class Main {
         this.humidity = humidity;
     }
 
-    public float getTempMin() {
+    public double getTempMin() {
         return tempMin;
     }
 
@@ -60,7 +60,7 @@ public class Main {
         this.tempMin = tempMin;
     }
 
-    public float getTempMax() {
+    public double getTempMax() {
         return tempMax;
     }
 
@@ -68,7 +68,7 @@ public class Main {
         this.tempMax = tempMax;
     }
 
-    public float getSeaLevel() {
+    public double getSeaLevel() {
         return seaLevel;
     }
 
@@ -76,7 +76,7 @@ public class Main {
         this.seaLevel = seaLevel;
     }
 
-    public float getGrndLevel() {
+    public double getGrndLevel() {
         return grndLevel;
     }
 

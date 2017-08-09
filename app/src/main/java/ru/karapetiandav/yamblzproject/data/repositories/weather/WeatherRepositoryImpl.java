@@ -2,35 +2,32 @@ package ru.karapetiandav.yamblzproject.data.repositories.weather;
 
 
 import io.reactivex.Single;
-import ru.karapetiandav.yamblzproject.data.model.WeatherDataModel;
+import ru.karapetiandav.yamblzproject.business.weather.mapper.WeatherMapper;
+import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
+import ru.karapetiandav.yamblzproject.data.model.CurrentWeatherDataModel;
+import ru.karapetiandav.yamblzproject.data.model.ForecastDataModel;
 import ru.karapetiandav.yamblzproject.data.network.NetworkHelper;
-import ru.karapetiandav.yamblzproject.data.prefs.PreferenceHelper;
 
 public class WeatherRepositoryImpl implements WeatherRepository {
 
-    private PreferenceHelper preferenceHelper;
     private NetworkHelper networkHelper;
+    private WeatherMapper weatherMapper;
 
-    public WeatherRepositoryImpl(PreferenceHelper preferenceHelper, NetworkHelper networkHelper) {
-        this.preferenceHelper = preferenceHelper;
+    public WeatherRepositoryImpl(NetworkHelper networkHelper,
+                                 WeatherMapper weatherMapper) {
         this.networkHelper = networkHelper;
+        this.weatherMapper = weatherMapper;
     }
 
     @Override
-    public Single<WeatherDataModel> loadWeather() {
-        return loadFromNetwork().onErrorResumeNext(loadCachedWeather());
+    public Single<CurrentWeatherDataModel> getCurrentWeather(CityDataModel cityDataModel) {
+        return networkHelper.getCurrentWeather(String.valueOf(cityDataModel.getLat()),
+                String.valueOf(cityDataModel.getLon()))
+                .map(weatherMapper::from);
     }
 
-    private Single<WeatherDataModel> loadFromNetwork() {
-        //todo
-//        return preferenceHelper.getCity()
-//                .flatMap(city -> networkHelper.loadWeather(city.getId()))
-//                .map(WeatherDataModel::valueOf)
-//                .doOnSuccess(dataModel -> preferenceHelper.saveWeather(dataModel).subscribe());
-        return Single.never();
-    }
-
-    private Single<WeatherDataModel> loadCachedWeather() {
-        return preferenceHelper.getWeather();
+    @Override
+    public Single<ForecastDataModel> getForecast(CityDataModel cityDataModel) {
+        return null;
     }
 }

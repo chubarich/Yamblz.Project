@@ -4,10 +4,10 @@
     <color name="colorPrimaryDark">#B19942</color>
     <color name="colorAccent">#FFDD60</color>
 
-    <color name="color_sun">#FFEB3B</color>
     <color name="color_hot">#FFC107</color>
     <color name="color_clouds">#9E9E9E</color>
     <color name="color_night">#607D8B</color>
     <color name="color_rain">#2196F3</color>
+    <color name="color_snow">#FAFAFA</color>
 
 </resources>

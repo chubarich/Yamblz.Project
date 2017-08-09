@@ -8,7 +8,7 @@ import ru.karapetiandav.yamblzproject.data.network.model.weather.WeatherResponse
 
 public interface NetworkHelper {
 
-    Single<WeatherResponse> loadWeather(int cityId);
+    Single<WeatherResponse> getCurrentWeather(String lat, String lon);
     Single<CitiesResponse> getCities(String input);
     Single<CityDetails> getCityDetails(String cityId);
 

@@ -32,7 +32,7 @@ public class NetworkHelperImpl implements NetworkHelper {
     }
 
     @Override
-    public Single<WeatherResponse> loadWeather(int cityId) {
-        return null;
+    public Single<WeatherResponse> getCurrentWeather(String lat, String lon) {
+        return weatherApi.getCurrentWeather(lat, lon, BuildConfig.OPEN_WEATHER_MAP_API_KEY);
     }
 }

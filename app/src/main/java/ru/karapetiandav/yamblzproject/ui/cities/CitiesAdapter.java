@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
     @Override
     public void onBindViewHolder(CitiesViewHolder holder, int position) {
         CityWeatherViewModel cityWeather = data.get(position);
-        Picasso.with(context).load(cityWeather.getIconId()).into(holder.cityIconIV);
+        holder.cityIconIV.setImageResource(cityWeather.getIconId());
         holder.cityNameTV.setText(cityWeather.getCityViewModel().getCityName());
         holder.countryTV.setText(cityWeather.getCityViewModel().getCountry());
         holder.tempTV.setText(cityWeather.getTemp());

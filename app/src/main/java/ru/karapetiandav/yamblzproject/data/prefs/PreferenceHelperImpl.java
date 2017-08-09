@@ -9,7 +9,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 import ru.karapetiandav.yamblzproject.data.exceptions.NoCachedWeatherException;
 import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
-import ru.karapetiandav.yamblzproject.data.model.WeatherDataModel;
+import ru.karapetiandav.yamblzproject.data.model.CurrentWeatherDataModel;
 
 public class PreferenceHelperImpl implements PreferenceHelper {
 
@@ -50,7 +50,7 @@ public class PreferenceHelperImpl implements PreferenceHelper {
     }
 
     @Override
-    public Single<WeatherDataModel> getWeather() {
+    public Single<CurrentWeatherDataModel> getWeather() {
         if (sharedPrefs.getInt(WEATHER_ID_KEY, 0) == 0) {
             return Single.error(new NoCachedWeatherException());
         }
@@ -59,25 +59,19 @@ public class PreferenceHelperImpl implements PreferenceHelper {
         float pressure = sharedPrefs.getFloat(PRESSURE_KEY, 0f);
         int humidity = sharedPrefs.getInt(HUMIDITY_KEY, 0);
         long time = sharedPrefs.getLong(TIME_KEY, 0L);
-        WeatherDataModel weatherDataModel = new WeatherDataModel(id, temp, pressure, humidity, time);
-        Log.v("log_tag", "Getting from preferences" + weatherDataModel.toString());
-        return Single.fromCallable(() -> weatherDataModel);
+        CurrentWeatherDataModel currentWeatherDataModel = new CurrentWeatherDataModel(id, temp, pressure, humidity);
+        Log.v("log_tag", "Getting from preferences" + currentWeatherDataModel.toString());
+        return Single.fromCallable(() -> currentWeatherDataModel);
     }
 
     @Override
-    public Completable saveWeather(WeatherDataModel dataModel) {
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putLong(TIME_KEY, dataModel.getTime());
-        editor.putFloat(TEMP_KEY, dataModel.getTemp());
-        editor.putInt(HUMIDITY_KEY, dataModel.getHumidity());
-        editor.putFloat(PRESSURE_KEY, dataModel.getPressure());
-        editor.putInt(WEATHER_ID_KEY, dataModel.getWeatherId());
-        editor.apply();
+    public Completable saveWeather(CurrentWeatherDataModel dataModel) {
+
         return Completable.complete();
     }
 
     @Override
     public Completable clearWeatherCache() {
-        return saveWeather(WeatherDataModel.getEmpty());
+        return saveWeather(CurrentWeatherDataModel.getEmpty());
     }
 }

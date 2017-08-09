@@ -18,7 +18,7 @@ public class WeatherInteractorImpl implements WeatherInteractor {
 
     @Override
     public Single<WeatherViewModel> getWeather() {
-        return weatherRepository.loadWeather().map(mapper::from);
+        return Single.just(new WeatherViewModel(1, "", "", ""));
     }
 
 }

@@ -8,12 +8,12 @@ public class Coord {
 
     @SerializedName("lon")
     @Expose
-    private float lon;
+    private double lon;
     @SerializedName("lat")
     @Expose
-    private float lat;
+    private double lat;
 
-    public float getLon() {
+    public double getLon() {
         return lon;
     }
 
@@ -21,7 +21,7 @@ public class Coord {
         this.lon = lon;
     }
 
-    public float getLat() {
+    public double getLat() {
         return lat;
     }
 

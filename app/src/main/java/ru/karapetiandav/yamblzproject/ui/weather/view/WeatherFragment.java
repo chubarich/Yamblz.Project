@@ -47,7 +47,6 @@ public class WeatherFragment extends Fragment implements WeatherView {
 
     @Override
     public void showWeather(WeatherViewModel weatherViewModel) {
-        todayDateTextView.setText(weatherViewModel.getDate());
         tempDegreeTextView.setText(weatherViewModel.getTemp());
         pressureTextView.setText(weatherViewModel.getPressure());
         humidityTextView.setText(weatherViewModel.getHumidity());

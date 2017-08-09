@@ -40,8 +40,8 @@ public class SyncWeatherJob extends Job {
     protected Result onRunJob(Params params) {
         //todo return
 //        preferenceHelper.getCity()
-//                .flatMap(city -> networkHelper.loadWeather(city.getId()))
-//                .map(WeatherDataModel::valueOf)
+//                .flatMap(city -> networkHelper.getCurrentWeather(city.getId()))
+//                .map(CurrentWeatherDataModel::valueOf)
 //                .doOnSuccess(preferenceHelper::saveWeather)
 //                .subscribe();
         return Result.SUCCESS;

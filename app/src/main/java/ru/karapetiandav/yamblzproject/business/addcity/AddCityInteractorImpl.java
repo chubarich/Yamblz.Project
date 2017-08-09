@@ -9,17 +9,17 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import ru.karapetiandav.yamblzproject.data.repositories.addcity.AddCityRepository;
+import ru.karapetiandav.yamblzproject.data.repositories.cities.CitiesRepository;
 import ru.karapetiandav.yamblzproject.ui.addcity.model.CityViewModel;
 import ru.karapetiandav.yamblzproject.utils.mappers.CityMapper;
 
 public class AddCityInteractorImpl implements AddCityInteractor {
 
-    private AddCityRepository addCityRepository;
+    private CitiesRepository citiesRepository;
     private CityMapper cityMapper;
 
-    public AddCityInteractorImpl(AddCityRepository addCityRepository, CityMapper cityMapper) {
-        this.addCityRepository = addCityRepository;
+    public AddCityInteractorImpl(CitiesRepository citiesRepository, CityMapper cityMapper) {
+        this.citiesRepository = citiesRepository;
         this.cityMapper = cityMapper;
     }
 
@@ -29,13 +29,13 @@ public class AddCityInteractorImpl implements AddCityInteractor {
         if (TextUtils.isEmpty(city)) {
             return Observable.fromCallable(ArrayList::new);
         }
-        return addCityRepository.getCitiesMatches(city)
+        return citiesRepository.getCitiesMatches(city)
                 .toObservable()
                 .map(cityMapper::getViewModelList);
     }
 
     @Override
     public Completable chooseCity(CityViewModel city) {
-        return addCityRepository.chooseCity(cityMapper.getCityDataModel(city));
+        return citiesRepository.chooseCity(cityMapper.getCityDataModel(city));
     }
 }

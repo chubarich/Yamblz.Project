@@ -6,13 +6,13 @@ public class CityDataModel {
     private String id;
     private String city;
     private String country;
-    private float lat;
-    private float lon;
+    private double lat;
+    private double lon;
 
     public CityDataModel() {
     }
 
-    public CityDataModel(String id, String city, String country, float lat, float lon) {
+    public CityDataModel(String id, String city, String country, double lat, double lon) {
         this.id = id;
         this.city = city;
         this.country = country;
@@ -32,11 +32,11 @@ public class CityDataModel {
         return country;
     }
 
-    public float getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public float getLon() {
+    public double getLon() {
         return lon;
     }
 }

@@ -8,7 +8,7 @@ public class Sys {
 
     @SerializedName("message")
     @Expose
-    private float message;
+    private double message;
     @SerializedName("country")
     @Expose
     private String country;
@@ -19,7 +19,7 @@ public class Sys {
     @Expose
     private int sunset;
 
-    public float getMessage() {
+    public double getMessage() {
         return message;
     }
 

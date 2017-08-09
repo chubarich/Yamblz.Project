@@ -34,4 +34,6 @@
     <string name="temp_measure_unit">°C</string>
     <string name="default_city_name">Москва</string>
     <string name="no_city_added">Не добавлено ни одного города</string>
+    <string name="format_pressure">%s кПа</string>
+    <string name="format_wind">%s м/с</string>
 </resources>

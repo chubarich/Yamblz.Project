@@ -3,15 +3,14 @@ package ru.karapetiandav.yamblzproject.data.network.model.city.details;
 
 public class Location {
 
-    private float lat;
-    private float lng;
+    private double lat;
+    private double lng;
 
-    public float getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public float getLng() {
+    public double getLng() {
         return lng;
     }
-
 }

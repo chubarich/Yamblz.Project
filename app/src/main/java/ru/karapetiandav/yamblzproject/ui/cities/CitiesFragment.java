@@ -2,6 +2,7 @@ package ru.karapetiandav.yamblzproject.ui.cities;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -22,12 +23,13 @@ import butterknife.ButterKnife;
 import ru.karapetiandav.yamblzproject.App;
 import ru.karapetiandav.yamblzproject.R;
 import ru.karapetiandav.yamblzproject.di.module.CitiesModule;
+import ru.karapetiandav.yamblzproject.ui.addcity.AddCityActivity;
 import ru.karapetiandav.yamblzproject.ui.cities.model.CityWeatherViewModel;
 
 public class CitiesFragment extends Fragment implements CitiesView {
 
     @BindView(R.id.cities_weather_recyclerview) RecyclerView recyclerView;
-    @BindView(R.id.no_city_added_textview) TextView noAddedCityTV;
+    @BindView(R.id.no_city_added_textview) TextView noCitiesTV;
     @BindView(R.id.add_city_fab) FloatingActionButton addCityFAB;
     @BindView(R.id.cities_swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
 
@@ -79,12 +81,17 @@ public class CitiesFragment extends Fragment implements CitiesView {
     }
 
     @Override
-    public void showNoCities() {
+    public void showNoCities(boolean show) {
+        noCitiesTV.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showError(boolean show) {
 
     }
 
     @Override
-    public void showError() {
-
+    public void showAddNewCity() {
+        startActivity(new Intent(getActivity(), AddCityActivity.class));
     }
 }

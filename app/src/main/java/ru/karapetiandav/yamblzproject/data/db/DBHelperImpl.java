@@ -38,15 +38,17 @@ public class DBHelperImpl extends SQLiteOpenHelper implements DBHelper {
 
     @Override
     public Completable saveCity(CityDataModel cityDataModel) {
-        cupboard().withDatabase(getWritableDatabase())
+        int delete = cupboard().withDatabase(getWritableDatabase())
                 .delete(CityDataModel.class, "id = ?", cityDataModel.getId());
-        return Completable.fromCallable(() -> cupboard().withDatabase(getWritableDatabase())
-                .put(cityDataModel));
+        long result = cupboard().withDatabase(getWritableDatabase())
+                .put(cityDataModel);
+        return Completable.complete();
     }
 
     @Override
     public Single<List<CityDataModel>> getCities() {
-        return Single.fromCallable(() -> cupboard().withDatabase(getReadableDatabase())
-                .query(CityDataModel.class).list());
+        List<CityDataModel> list = cupboard().withDatabase(getReadableDatabase())
+                .query(CityDataModel.class).list();
+        return Single.fromCallable(() -> list);
     }
 }

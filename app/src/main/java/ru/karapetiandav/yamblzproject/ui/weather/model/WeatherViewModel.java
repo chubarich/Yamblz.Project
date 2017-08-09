@@ -7,15 +7,12 @@ public final class WeatherViewModel {
     private final String temp;
     private final String pressure;
     private final String humidity;
-    private final String date;
 
-    public WeatherViewModel(int imageResourceId, String temp, String pressure,
-                            String humidity, String date) {
+    public WeatherViewModel(int imageResourceId, String temp, String pressure, String humidity) {
         this.imageResourceId = imageResourceId;
         this.temp = temp;
         this.pressure = pressure;
         this.humidity = humidity;
-        this.date = date;
     }
 
     public int getImageResourceId() {
@@ -34,7 +31,4 @@ public final class WeatherViewModel {
         return humidity;
     }
 
-    public String getDate() {
-        return date;
-    }
 }

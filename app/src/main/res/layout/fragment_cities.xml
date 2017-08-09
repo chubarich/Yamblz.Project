@@ -27,6 +27,7 @@
         android:layout_gravity="bottom|end"
         android:src="@drawable/ic_add"
         app:layout_anchor="@+id/cities_weather_recyclerview"
+        android:layout_margin="16dp"
         app:layout_anchorGravity="bottom|right|end" />
 
     <TextView
@@ -34,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_city_added"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
+        android:textSize="20sp"
+        android:layout_gravity="center"/>
 
 </android.support.design.widget.CoordinatorLayout>

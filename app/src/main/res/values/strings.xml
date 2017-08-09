@@ -48,6 +48,12 @@
     <string name="city_name_key" translatable="false">city_name</string>
     <string name="country_key" translatable="false">country</string>
 
+    <!--weather_formatting-->
+    <string name="format_temp_metric" translatable="false">%s°</string>
+    <string name="format_pressure">%s kPa</string>
+    <string name="format_humidity" translatable="false">%s %%</string>
+    <string name="format_wind">%s m/s</string>
+
     <!--WeatherFragment-->
     <string name="pressure_measure_unit">hpa</string>
     <string name="temp_measure_unit">°F</string>

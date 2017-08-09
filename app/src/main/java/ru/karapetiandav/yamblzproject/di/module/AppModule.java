@@ -13,7 +13,6 @@ import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 import ru.karapetiandav.yamblzproject.data.prefs.PreferenceHelper;
 import ru.karapetiandav.yamblzproject.data.prefs.PreferenceHelperImpl;
-import ru.karapetiandav.yamblzproject.utils.Utils;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulersImpl;
 
@@ -68,10 +67,4 @@ public class AppModule {
         return new PreferenceHelperImpl(sharedPreferences, resources);
     }
 
-    @Provides
-    @Singleton
-    @NonNull
-    Utils provideUtils(Resources resources) {
-        return new Utils(resources);
-    }
 }

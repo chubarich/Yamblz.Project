@@ -3,7 +3,10 @@ package ru.karapetiandav.yamblzproject.business.weather.mapper;
 
 import android.support.annotation.NonNull;
 
-import ru.karapetiandav.yamblzproject.data.model.WeatherDataModel;
+import ru.karapetiandav.yamblzproject.data.model.CurrentWeatherDataModel;
+import ru.karapetiandav.yamblzproject.data.network.model.weather.Main;
+import ru.karapetiandav.yamblzproject.data.network.model.weather.Weather;
+import ru.karapetiandav.yamblzproject.data.network.model.weather.WeatherResponse;
 import ru.karapetiandav.yamblzproject.ui.weather.model.WeatherViewModel;
 import ru.karapetiandav.yamblzproject.utils.Utils;
 
@@ -16,17 +19,26 @@ public class WeatherMapper {
     }
 
     @NonNull
-    public WeatherViewModel from(@NonNull WeatherDataModel weatherData)
+    public WeatherViewModel from(@NonNull CurrentWeatherDataModel weatherData)
             throws IllegalArgumentException {
         if (weatherData.getTemp() == 0f && weatherData.getPressure() == 0){
             throw new IllegalArgumentException("Converting null weather data");
         }
-        int drawableId = utils.getIconResourceForWeatherCondition(weatherData.getWeatherId());
+        int drawableId = utils.getIconResourceForWeatherId(weatherData.getWeatherId());
         String temp = utils.formatTemperature(weatherData.getTemp());
         String pressure = utils.formatPressure(weatherData.getPressure());
         String humidity = utils.formatHumidity(weatherData.getHumidity());
-        String time = utils.convertUnixTimeToString(weatherData.getTime());
-        return new WeatherViewModel(drawableId, temp, pressure, humidity, time);
+        return new WeatherViewModel(drawableId, temp, pressure, humidity);
+    }
+
+    public CurrentWeatherDataModel from(WeatherResponse weatherResponse) {
+        Weather weather = weatherResponse.getWeather().get(0);
+        Main main = weatherResponse.getMain();
+        return new CurrentWeatherDataModel(
+                weather.getId(),
+                main.getTemp(),
+                main.getPressure(),
+                main.getHumidity());
     }
 
 }

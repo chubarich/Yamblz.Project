@@ -7,9 +7,10 @@ import ru.karapetiandav.yamblzproject.ui.cities.model.CityWeatherViewModel;
 
 public interface CitiesView {
 
-    void showNoCities();
+    void showNoCities(boolean show);
     void showCities(List<CityWeatherViewModel> cities);
     void showLoading();
     void hideLoading();
-    void showError();
+    void showError(boolean show);
+    void showAddNewCity();
 }
