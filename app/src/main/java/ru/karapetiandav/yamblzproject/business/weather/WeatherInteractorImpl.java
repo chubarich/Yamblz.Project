@@ -4,7 +4,7 @@ package ru.karapetiandav.yamblzproject.business.weather;
 import io.reactivex.Single;
 import ru.karapetiandav.yamblzproject.business.weather.mapper.WeatherMapper;
 import ru.karapetiandav.yamblzproject.data.repositories.weather.WeatherRepository;
-import ru.karapetiandav.yamblzproject.ui.weather.model.WeatherViewModel;
+import ru.karapetiandav.yamblzproject.ui.entities.WeatherViewModel;
 
 public class WeatherInteractorImpl implements WeatherInteractor {
 

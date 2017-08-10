@@ -11,7 +11,7 @@ import ru.karapetiandav.yamblzproject.data.network.model.city.autocomplete.Citie
 import ru.karapetiandav.yamblzproject.data.network.model.city.autocomplete.Prediction;
 import ru.karapetiandav.yamblzproject.data.network.model.city.details.CityDetails;
 import ru.karapetiandav.yamblzproject.data.network.model.city.details.Location;
-import ru.karapetiandav.yamblzproject.ui.addcity.model.CityViewModel;
+import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 
 public class CityMapper {
 

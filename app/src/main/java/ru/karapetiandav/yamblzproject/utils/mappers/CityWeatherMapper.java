@@ -3,7 +3,7 @@ package ru.karapetiandav.yamblzproject.utils.mappers;
 
 import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
 import ru.karapetiandav.yamblzproject.data.model.CurrentWeatherDataModel;
-import ru.karapetiandav.yamblzproject.ui.cities.model.CityWeatherViewModel;
+import ru.karapetiandav.yamblzproject.ui.entities.CityWeatherViewModel;
 import ru.karapetiandav.yamblzproject.utils.Utils;
 
 public class CityWeatherMapper {

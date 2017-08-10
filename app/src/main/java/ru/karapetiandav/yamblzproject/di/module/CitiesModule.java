@@ -5,16 +5,15 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import io.reactivex.disposables.CompositeDisposable;
 import ru.karapetiandav.yamblzproject.business.cities.CitiesInteractor;
 import ru.karapetiandav.yamblzproject.business.cities.CitiesInteractorImpl;
 import ru.karapetiandav.yamblzproject.data.repositories.cities.CitiesRepository;
 import ru.karapetiandav.yamblzproject.data.repositories.weather.WeatherRepository;
 import ru.karapetiandav.yamblzproject.di.scope.CitiesScope;
-import ru.karapetiandav.yamblzproject.ui.cities.CitiesAdapter;
-import ru.karapetiandav.yamblzproject.ui.cities.CitiesPresenter;
-import ru.karapetiandav.yamblzproject.ui.cities.CitiesPresenterImpl;
-import ru.karapetiandav.yamblzproject.ui.cities.CitiesView;
+import ru.karapetiandav.yamblzproject.ui.adapters.CitiesAdapter;
+import ru.karapetiandav.yamblzproject.ui.presenters.CitiesPresenter;
+import ru.karapetiandav.yamblzproject.ui.presenters.CitiesPresenterImpl;
+import ru.karapetiandav.yamblzproject.ui.views.CitiesView;
 import ru.karapetiandav.yamblzproject.utils.mappers.CityWeatherMapper;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;
 
@@ -25,7 +24,7 @@ public class CitiesModule {
     @NonNull
     @CitiesScope
     CitiesPresenter<CitiesView> provideCitiesPresenter(CitiesInteractor interactor, RxSchedulers rxSchedulers) {
-        return new CitiesPresenterImpl(interactor, new CompositeDisposable(), rxSchedulers);
+        return new CitiesPresenterImpl(interactor, rxSchedulers);
     }
 
     @Provides

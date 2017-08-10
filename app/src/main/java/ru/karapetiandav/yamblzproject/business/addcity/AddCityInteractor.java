@@ -5,7 +5,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import ru.karapetiandav.yamblzproject.ui.addcity.model.CityViewModel;
+import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 
 public interface AddCityInteractor {
 

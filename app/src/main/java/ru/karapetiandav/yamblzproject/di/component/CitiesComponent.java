@@ -3,7 +3,7 @@ package ru.karapetiandav.yamblzproject.di.component;
 import dagger.Subcomponent;
 import ru.karapetiandav.yamblzproject.di.module.CitiesModule;
 import ru.karapetiandav.yamblzproject.di.scope.CitiesScope;
-import ru.karapetiandav.yamblzproject.ui.cities.CitiesFragment;
+import ru.karapetiandav.yamblzproject.ui.fragments.CitiesFragment;
 
 @CitiesScope
 @Subcomponent(modules = CitiesModule.class)

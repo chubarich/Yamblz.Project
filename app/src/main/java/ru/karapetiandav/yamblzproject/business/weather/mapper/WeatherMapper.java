@@ -7,7 +7,7 @@ import ru.karapetiandav.yamblzproject.data.model.CurrentWeatherDataModel;
 import ru.karapetiandav.yamblzproject.data.network.model.weather.Main;
 import ru.karapetiandav.yamblzproject.data.network.model.weather.Weather;
 import ru.karapetiandav.yamblzproject.data.network.model.weather.WeatherResponse;
-import ru.karapetiandav.yamblzproject.ui.weather.model.WeatherViewModel;
+import ru.karapetiandav.yamblzproject.ui.entities.WeatherViewModel;
 import ru.karapetiandav.yamblzproject.utils.Utils;
 
 public class WeatherMapper {
