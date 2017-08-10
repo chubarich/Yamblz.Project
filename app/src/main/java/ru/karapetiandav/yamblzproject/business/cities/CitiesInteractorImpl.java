@@ -1,11 +1,7 @@
 package ru.karapetiandav.yamblzproject.business.cities;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.Single;
-import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
+import io.reactivex.Observable;
 import ru.karapetiandav.yamblzproject.data.repositories.cities.CitiesRepository;
 import ru.karapetiandav.yamblzproject.data.repositories.weather.WeatherRepository;
 import ru.karapetiandav.yamblzproject.ui.cities.model.CityWeatherViewModel;
@@ -31,19 +27,10 @@ public class CitiesInteractorImpl implements CitiesInteractor {
     }
 
     @Override
-    public Single<List<CityWeatherViewModel>> loadCityWeatherList() {
-        return citiesRepository.getCitiesList().flatMap(this::getCityWeatherList);
-    }
-
-    private Single<List<CityWeatherViewModel>> getCityWeatherList(List<CityDataModel> cities) {
-        List<CityWeatherViewModel> result = new ArrayList<>();
-        for(CityDataModel city : cities) {
-            weatherRepository.getCurrentWeather(city)
-                    .subscribeOn(schedulers.getIOScheduler())
-                    .observeOn(schedulers.getMainThreadScheduler())
-                    .subscribe(currentWeatherDataModel ->
-                            result.add(mapper.get(city, currentWeatherDataModel)));
-        }
-        return Single.fromCallable(() -> result);
+    public Observable<CityWeatherViewModel> subscribeOnCityWeathers() {
+        return citiesRepository.subscribeOnCities()
+                .flatMap(city -> weatherRepository.getCurrentWeather(city)
+                        .toObservable()
+                        .map(currentWeather -> mapper.get(city, currentWeather)));
     }
 }

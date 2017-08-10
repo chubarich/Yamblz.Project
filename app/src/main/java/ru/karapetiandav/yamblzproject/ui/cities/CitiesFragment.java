@@ -14,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -66,8 +64,8 @@ public class CitiesFragment extends Fragment implements CitiesView {
     }
 
     @Override
-    public void showCities(List<CityWeatherViewModel> cities) {
-        adapter.setData(cities);
+    public void showCity(CityWeatherViewModel city) {
+        adapter.addCity(city);
     }
 
     @Override

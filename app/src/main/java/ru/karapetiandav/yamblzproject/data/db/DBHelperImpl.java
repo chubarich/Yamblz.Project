@@ -8,7 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.List;
 
 import io.reactivex.Completable;
-import io.reactivex.Single;
+import io.reactivex.Observable;
+import io.reactivex.subjects.ReplaySubject;
 import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
 import ru.karapetiandav.yamblzproject.di.qualifiers.DbName;
 import ru.karapetiandav.yamblzproject.di.qualifiers.DbVersion;
@@ -16,6 +17,8 @@ import ru.karapetiandav.yamblzproject.di.qualifiers.DbVersion;
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
 public class DBHelperImpl extends SQLiteOpenHelper implements DBHelper {
+
+    private ReplaySubject<CityDataModel> citiesSubject = ReplaySubject.create();
 
     public DBHelperImpl(Context context,@DbName String name,
                         @DbVersion int version) {
@@ -37,18 +40,22 @@ public class DBHelperImpl extends SQLiteOpenHelper implements DBHelper {
     }
 
     @Override
+    public Observable<CityDataModel> subscribe() {
+        List<CityDataModel> list = cupboard().withDatabase(getReadableDatabase())
+            .query(CityDataModel.class).list();
+        for (CityDataModel city : list) {
+            citiesSubject.onNext(city);
+        }
+        return citiesSubject;
+    }
+
+    @Override
     public Completable saveCity(CityDataModel cityDataModel) {
         int delete = cupboard().withDatabase(getWritableDatabase())
                 .delete(CityDataModel.class, "id = ?", cityDataModel.getId());
         long result = cupboard().withDatabase(getWritableDatabase())
                 .put(cityDataModel);
+        citiesSubject.onNext(cityDataModel);
         return Completable.complete();
-    }
-
-    @Override
-    public Single<List<CityDataModel>> getCities() {
-        List<CityDataModel> list = cupboard().withDatabase(getReadableDatabase())
-                .query(CityDataModel.class).list();
-        return Single.fromCallable(() -> list);
     }
 }

@@ -6,8 +6,6 @@
     android:layout_height="wrap_content"
     card_view:cardBackgroundColor="@color/color_hot"
     card_view:cardCornerRadius="5dp"
-    card_view:cardElevation="0dp"
-    card_view:cardMaxElevation="0dp"
     card_view:cardUseCompatPadding="true"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"

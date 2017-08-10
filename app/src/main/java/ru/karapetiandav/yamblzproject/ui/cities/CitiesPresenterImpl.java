@@ -1,8 +1,6 @@
 package ru.karapetiandav.yamblzproject.ui.cities;
 
 
-import java.util.List;
-
 import io.reactivex.disposables.CompositeDisposable;
 import ru.karapetiandav.yamblzproject.business.cities.CitiesInteractor;
 import ru.karapetiandav.yamblzproject.ui.cities.model.CityWeatherViewModel;
@@ -31,21 +29,16 @@ public class CitiesPresenterImpl implements CitiesPresenter<CitiesView> {
     }
 
     private void loadCityWeathers() {
-        compositeDisposable.add(citiesInteractor.loadCityWeatherList()
-                .doOnSubscribe(ignore -> view.showLoading())
-                .observeOn(rxSchedulers.getMainThreadScheduler())
-                .doAfterTerminate(view::hideLoading)
+        compositeDisposable.add(citiesInteractor.subscribeOnCityWeathers()
                 .subscribeOn(rxSchedulers.getIOScheduler())
                 .observeOn(rxSchedulers.getMainThreadScheduler())
                 .subscribe(this::handleSuccess, this::handleError));
     }
 
-    private void handleSuccess(List<CityWeatherViewModel> cities) {
-        if (cities.size() != 0) {
-            view.showNoCities(false);
-            view.showCities(cities);
-        }
-
+    private void handleSuccess(CityWeatherViewModel city) {
+        view.showCity(city);
+        view.hideLoading();
+        view.showNoCities(false);
     }
 
     private void handleError(Throwable throwable) {

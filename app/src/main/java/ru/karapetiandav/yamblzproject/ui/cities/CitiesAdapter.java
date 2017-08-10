@@ -64,6 +64,13 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
         notifyDataSetChanged();
     }
 
+    public void addCity(CityWeatherViewModel city) {
+        if (!data.contains(city)) {
+            data.add(city);
+            notifyItemInserted(data.size() - 1);
+        }
+    }
+
     public void setOnCityWeatherClickListener(
             OnCityWeatherClickListener onCityWeatherClickListener) {
         this.onCityWeatherClickListener = onCityWeatherClickListener;

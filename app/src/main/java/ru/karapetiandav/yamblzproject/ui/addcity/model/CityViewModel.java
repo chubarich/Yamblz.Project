@@ -24,4 +24,19 @@ public final class CityViewModel {
     public String getCountry() {
         return country;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CityViewModel viewModel = (CityViewModel) o;
+
+        if (getCityId() != null ? !getCityId().equals(viewModel.getCityId()) : viewModel.getCityId() != null)
+            return false;
+        if (getCityName() != null ? !getCityName().equals(viewModel.getCityName()) : viewModel.getCityName() != null)
+            return false;
+        return getCountry() != null ? getCountry().equals(viewModel.getCountry()) : viewModel.getCountry() == null;
+
+    }
 }
