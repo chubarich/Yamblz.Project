@@ -8,10 +8,10 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     signingConfigs {
         config {
-            keyAlias 'key0'
-            keyPassword '1234567890'
-            storeFile file('C:/Users/davit/AndroidStudioProjects/Yamblz.Project/keystore/release.jks')
-            storePassword '1234567890'
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
     }
     compileSdkVersion versions.compileSdk
@@ -29,6 +29,10 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
+            debuggable false
+        }
+        debug {
+            debuggable true
         }
     }
     buildTypes.each {
