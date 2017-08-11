@@ -72,4 +72,6 @@
     <string name="error_no_data">Failed to retrieve data</string>
     <string name="no_city_added">No city added</string>
 
+    <bool name="isTablet">true</bool>
+
 </resources>

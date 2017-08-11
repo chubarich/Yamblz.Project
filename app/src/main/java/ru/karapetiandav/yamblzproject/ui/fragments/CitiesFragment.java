@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -32,6 +33,8 @@ import ru.karapetiandav.yamblzproject.ui.presenters.CitiesPresenter;
 import ru.karapetiandav.yamblzproject.ui.views.CitiesView;
 
 public class CitiesFragment extends Fragment implements CitiesView {
+
+    private static final int SPAN_COUNT_DEFAULT = 2;
 
     private OnCitySelected onCitySelected;
 
@@ -81,8 +84,14 @@ public class CitiesFragment extends Fragment implements CitiesView {
     }
 
     private void setUpRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(
-                getActivity(), LinearLayoutManager.VERTICAL, false));
+        RecyclerView.LayoutManager layoutManager;
+        if (getResources().getBoolean(R.bool.isTablet)) {
+            layoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT_DEFAULT);
+        } else {
+            layoutManager = new LinearLayoutManager(
+                    getActivity(), LinearLayoutManager.VERTICAL, false);
+        }
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         adapter.setOnCityClickListener(presenter::onCityClick);
 

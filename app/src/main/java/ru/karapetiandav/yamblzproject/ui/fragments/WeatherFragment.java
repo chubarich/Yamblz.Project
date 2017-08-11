@@ -5,9 +5,9 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +31,7 @@ import ru.karapetiandav.yamblzproject.ui.views.WeatherView;
 public class WeatherFragment extends Fragment implements WeatherView {
 
     private static final String CITY_KEY = "city_key";
+    private static final int SPAN_COUNT_DEFAULT = 2;
 
     @Inject WeatherPresenter<WeatherView> weatherPresenter;
     @Inject WeatherAdapter weatherAdapter;
@@ -66,8 +67,14 @@ public class WeatherFragment extends Fragment implements WeatherView {
 
     private void setUpLayout() {
         swipeRefreshLayout.setOnRefreshListener(weatherPresenter::onSwipeToRefresh);
-        recyclerView.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        RecyclerView.LayoutManager layoutManager;
+        if (getResources().getBoolean(R.bool.isTablet)) {
+            layoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT_DEFAULT);
+        } else {
+            layoutManager = new LinearLayoutManager(
+                    getActivity(), LinearLayoutManager.VERTICAL, false);
+        }
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(weatherAdapter);
     }
 
