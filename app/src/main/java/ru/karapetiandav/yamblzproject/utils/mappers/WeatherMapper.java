@@ -13,14 +13,17 @@ import ru.karapetiandav.yamblzproject.data.network.model.weather.Temp;
 import ru.karapetiandav.yamblzproject.data.network.model.weather.Weather;
 import ru.karapetiandav.yamblzproject.data.network.model.weather.WeatherResponse;
 import ru.karapetiandav.yamblzproject.ui.entities.WeatherViewModel;
+import ru.karapetiandav.yamblzproject.utils.TimeUtils;
 import ru.karapetiandav.yamblzproject.utils.Utils;
 
 public class WeatherMapper {
 
     private Utils utils;
+    private TimeUtils timeUtils;
 
-    public WeatherMapper(Utils utils) {
+    public WeatherMapper(Utils utils, TimeUtils timeUtils) {
         this.utils = utils;
+        this.timeUtils = timeUtils;
     }
 
     public WeatherDataModel getWeatherFromResponse(WeatherResponse weatherResponse, String cityId) {
@@ -83,7 +86,7 @@ public class WeatherMapper {
                 .setPressure(utils.formatPressure(forecast.getPressure()))
                 .setHumidity(utils.formatHumidity(forecast.getHumidity()))
                 .setWind(utils.formatWind(forecast.getSpeed()))
-                .setDayOfWeek(utils.formatDayOfWeek(forecast.getDate()));
+                .setDayOfWeek(timeUtils.formatDate(forecast.getDate()));
         return builder.build();
     }
 }

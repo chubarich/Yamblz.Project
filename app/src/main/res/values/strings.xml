@@ -51,6 +51,11 @@
     <string name="format_humidity" translatable="false">%s %%</string>
     <string name="format_wind">%s m/s</string>
 
+    <!--time-->
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="format_day_of_week" translatable="false">EEEE</string>
+
     <!--weather-->
     <string name="humidity_label">Humidity</string>
     <string name="pressure_label">Pressure</string>

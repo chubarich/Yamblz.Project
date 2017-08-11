@@ -36,4 +36,6 @@
     <string name="evening_label">Вечер</string>
     <string name="morning_label">Утро</string>
     <string name="night_label">Ночь</string>
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
 </resources>

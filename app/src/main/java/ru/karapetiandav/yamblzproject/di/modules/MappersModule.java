@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.karapetiandav.yamblzproject.utils.TimeUtils;
 import ru.karapetiandav.yamblzproject.utils.mappers.WeatherMapper;
 import ru.karapetiandav.yamblzproject.utils.Utils;
 import ru.karapetiandav.yamblzproject.utils.mappers.CityMapper;
@@ -24,8 +25,8 @@ public class MappersModule {
     @Provides
     @NonNull
     @Singleton
-    WeatherMapper provideWeatherMapper(Utils utils) {
-        return new WeatherMapper(utils);
+    WeatherMapper provideWeatherMapper(Utils utils, TimeUtils timeUtils) {
+        return new WeatherMapper(utils, timeUtils);
     }
 
     @Provides

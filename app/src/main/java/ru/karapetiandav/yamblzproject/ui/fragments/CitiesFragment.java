@@ -1,6 +1,7 @@
 package ru.karapetiandav.yamblzproject.ui.fragments;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -50,13 +51,16 @@ public class CitiesFragment extends Fragment implements CitiesView {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        castContextToListener(activity);
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        try {
-            onCitySelected = (OnCitySelected) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement OnCitySelected");
-        }
+        castContextToListener(context);
     }
 
     @Nullable
@@ -125,5 +129,13 @@ public class CitiesFragment extends Fragment implements CitiesView {
     public void onDestroyView() {
         super.onDestroyView();
         presenter.onDetach();
+    }
+
+    private void castContextToListener(Context context) {
+        try {
+            onCitySelected = (OnCitySelected) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnCitySelected");
+        }
     }
 }

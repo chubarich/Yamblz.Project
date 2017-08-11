@@ -6,6 +6,8 @@ import ru.karapetiandav.yamblzproject.R;
 
 public class Utils {
 
+    private static final double CONST_FROM_KELVIN_TO_CELSIUS = 273.15;
+
     private Resources resources;
 
     public Utils(Resources resources) {
@@ -28,13 +30,9 @@ public class Utils {
     }
 
     public String formatTemperature(double temp) {
-        temp = temp - 273.15;
+        temp = temp - CONST_FROM_KELVIN_TO_CELSIUS;
         return String.format(resources.getString(R.string.format_temp),
                 String.valueOf(Math.round(temp)));
-    }
-
-    public String formatDayOfWeek(int date) {
-        return "Tomorrow";
     }
 
     public int getIconResourceForWeatherId(int weatherId) {
