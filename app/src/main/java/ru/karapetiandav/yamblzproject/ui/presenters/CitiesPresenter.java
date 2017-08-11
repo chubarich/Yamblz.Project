@@ -8,4 +8,5 @@ public interface CitiesPresenter<V> extends Presenter<V> {
     void onCityClick(CityViewModel city);
     void onAddCityClick();
     void onSwipeToRefresh();
+    void onCityRemoved(CityViewModel city);
 }

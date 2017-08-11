@@ -106,6 +106,19 @@ public class DBHelperImpl extends SQLiteOpenHelper implements DBHelper {
                 .list());
     }
 
+    @Override
+    public Completable removeCity(String cityId) {
+        return Completable.fromCallable(() -> {
+            cupboard().withDatabase(getWritableDatabase())
+                    .delete(CityDataModel.class, BY_CITY_ID, cityId);
+            cupboard().withDatabase(getWritableDatabase())
+                    .delete(WeatherDataModel.class, BY_CITY_ID, cityId);
+            cupboard().withDatabase(getWritableDatabase())
+                    .delete(ForecastDataModel.class, BY_CITY_ID, cityId);
+            return Completable.complete();
+        });
+    }
+
     private List<CityDataModel> getCityList() {
         return cupboard().withDatabase(getReadableDatabase())
                 .query(CityDataModel.class).list();

@@ -13,4 +13,5 @@ public interface CitiesRepository {
     Single<List<CityDataModel>> getCitiesMatches(String input);
     Completable chooseCity(CityDataModel cityDataModel);
     Single<CityDataModel> getCity(String cityId);
+    Completable removeCity(String cityId);
 }

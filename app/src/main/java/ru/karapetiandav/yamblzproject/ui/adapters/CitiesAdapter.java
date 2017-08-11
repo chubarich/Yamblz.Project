@@ -65,6 +65,10 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
         notifyDataSetChanged();
     }
 
+    public List<CityWeatherViewModel> getData() {
+        return data;
+    }
+
     public void addCity(CityWeatherViewModel city) {
         if (!data.contains(city)) {
             data.add(city);
@@ -76,6 +80,13 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
             OnCityClickListener onCityClickListener) {
         this.onCityClickListener = onCityClickListener;
     }
+
+    public void itemDismissed(int position) {
+        data.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
+    }
+
 
     class CitiesViewHolder extends RecyclerView.ViewHolder {
 

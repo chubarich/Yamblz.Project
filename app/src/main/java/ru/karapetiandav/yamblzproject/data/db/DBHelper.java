@@ -19,5 +19,6 @@ public interface DBHelper {
     Single<WeatherDataModel> getWeather(String cityId);
     Completable saveForecastList(List<ForecastDataModel> forecastList);
     Single<List<ForecastDataModel>> getForecastList(String cityId);
+    Completable removeCity(String cityId);
 
 }

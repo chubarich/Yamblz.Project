@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.karapetiandav.yamblzproject.business.RemoveCityUseCase;
 import ru.karapetiandav.yamblzproject.business.cities.CitiesInteractor;
 import ru.karapetiandav.yamblzproject.business.cities.CitiesInteractorImpl;
 import ru.karapetiandav.yamblzproject.data.repositories.CitiesRepository;
@@ -23,8 +24,17 @@ public class CitiesModule {
     @Provides
     @NonNull
     @CitiesScope
-    CitiesPresenter<CitiesView> provideCitiesPresenter(CitiesInteractor interactor, RxSchedulers rxSchedulers) {
-        return new CitiesPresenterImpl(interactor, rxSchedulers);
+    CitiesPresenter<CitiesView> provideCitiesPresenter(CitiesInteractor interactor,
+                                                       RxSchedulers rxSchedulers,
+                                                       RemoveCityUseCase removeCityUseCase) {
+        return new CitiesPresenterImpl(interactor, rxSchedulers, removeCityUseCase);
+    }
+
+    @Provides
+    @NonNull
+    @CitiesScope
+    RemoveCityUseCase provideRemoveCityUseCase(CitiesRepository citiesRepository) {
+        return new RemoveCityUseCase(citiesRepository);
     }
 
     @Provides

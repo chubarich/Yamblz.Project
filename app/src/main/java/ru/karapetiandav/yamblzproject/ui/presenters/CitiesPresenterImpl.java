@@ -1,6 +1,7 @@
 package ru.karapetiandav.yamblzproject.ui.presenters;
 
 
+import ru.karapetiandav.yamblzproject.business.RemoveCityUseCase;
 import ru.karapetiandav.yamblzproject.business.cities.CitiesInteractor;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.entities.CityWeatherViewModel;
@@ -12,17 +13,39 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
 
     private CitiesInteractor citiesInteractor;
     private RxSchedulers rxSchedulers;
+    private RemoveCityUseCase removeCityUseCase;
 
-    public CitiesPresenterImpl(CitiesInteractor citiesInteractor,
-                               RxSchedulers rxSchedulers) {
+    public CitiesPresenterImpl(CitiesInteractor citiesInteractor, RxSchedulers rxSchedulers,
+                               RemoveCityUseCase removeCityUseCase) {
         this.citiesInteractor = citiesInteractor;
         this.rxSchedulers = rxSchedulers;
+        this.removeCityUseCase = removeCityUseCase;
     }
 
     @Override
     public void onAttach(CitiesView view) {
         super.onAttach(view);
         loadCityWeathers();
+    }
+
+    @Override
+    public void onCityClick(CityViewModel item) {
+        getView().showWeather(item);
+    }
+
+    @Override
+    public void onAddCityClick() {
+        getView().showAddNewCity();
+    }
+
+    @Override
+    public void onSwipeToRefresh() {
+        loadCityWeathers();
+    }
+
+    @Override
+    public void onCityRemoved(CityViewModel city) {
+        removeCityUseCase.execute(city.getCityId()).subscribe();
     }
 
     private void loadCityWeathers() {
@@ -42,19 +65,5 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
         throwable.printStackTrace();
     }
 
-    @Override
-    public void onCityClick(CityViewModel item) {
-        getView().showWeather(item);
-    }
-
-    @Override
-    public void onAddCityClick() {
-        getView().showAddNewCity();
-    }
-
-    @Override
-    public void onSwipeToRefresh() {
-        loadCityWeathers();
-    }
 
 }

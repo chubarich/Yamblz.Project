@@ -46,4 +46,9 @@ public class CitiesRepositoryImpl implements CitiesRepository {
     public Single<CityDataModel> getCity(String cityId) {
         return dbHelper.getCity(cityId);
     }
+
+    @Override
+    public Completable removeCity(String cityId) {
+        return dbHelper.removeCity(cityId);
+    }
 }
