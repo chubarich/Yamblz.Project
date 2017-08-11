@@ -15,10 +15,14 @@ public class ForecastDataModel {
     private double humidity;
     private double speed;
     private double deg;
+    private String cityId;
+
+    public ForecastDataModel() {
+    }
 
     public ForecastDataModel(int date, int weatherId, double min, double max, double morn,
                              double day, double eve, double night, double pressure,
-                             double humidity, double speed, double deg) {
+                             double humidity, double speed, double deg, String cityId) {
         this.date = date;
         this.weatherId = weatherId;
         this.min = min;
@@ -31,6 +35,7 @@ public class ForecastDataModel {
         this.humidity = humidity;
         this.speed = speed;
         this.deg = deg;
+        this.cityId = cityId;
     }
 
     public int getDate() {
@@ -81,6 +86,10 @@ public class ForecastDataModel {
         return deg;
     }
 
+    public String getCityId() {
+        return cityId;
+    }
+
     public static class Builder {
         private int date;
         private int weatherId;
@@ -94,6 +103,7 @@ public class ForecastDataModel {
         private double humidity;
         private double speed;
         private double deg;
+        private String cityId;
 
         public Builder setDate(int date) {
             this.date = date;
@@ -155,9 +165,14 @@ public class ForecastDataModel {
             return this;
         }
 
+        public Builder setCityId(String cityId) {
+            this.cityId = cityId;
+            return this;
+        }
+
         public ForecastDataModel build() {
             return new ForecastDataModel(date, weatherId, min, max, morn, day, eve, night, pressure,
-                    humidity, speed, deg);
+                    humidity, speed, deg, cityId);
         }
     }
 }

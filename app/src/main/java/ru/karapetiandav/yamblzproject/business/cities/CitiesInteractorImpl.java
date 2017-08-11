@@ -29,8 +29,9 @@ public class CitiesInteractorImpl implements CitiesInteractor {
     @Override
     public Observable<CityWeatherViewModel> subscribeOnCityWeathers() {
         return citiesRepository.subscribeOnCities()
+                .flatMap(Observable::fromIterable)
                 .flatMap(city -> weatherRepository.getCurrentWeather(city)
                         .toObservable()
-                        .map(currentWeather -> mapper.get(city, currentWeather)));
+                        .map(currentWeather -> mapper.getCityWeatherViewModel(city, currentWeather)));
     }
 }

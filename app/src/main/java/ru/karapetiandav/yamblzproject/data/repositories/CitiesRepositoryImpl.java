@@ -24,8 +24,8 @@ public class CitiesRepositoryImpl implements CitiesRepository {
     }
 
     @Override
-    public Observable<CityDataModel> subscribeOnCities() {
-        return dbHelper.subscribe();
+    public Observable<List<CityDataModel>> subscribeOnCities() {
+        return dbHelper.subscribeOnCityChanges();
     }
 
     @Override
@@ -36,10 +36,10 @@ public class CitiesRepositoryImpl implements CitiesRepository {
     }
 
     @Override
-    public Completable chooseCity(CityDataModel cityDataModel) {
-        return Completable.fromSingle(networkHelper.getCityDetails(cityDataModel.getCityId())
-                .map(cityDetails -> mapper.getCityDataModelWithCoords(cityDataModel, cityDetails))
-                .doOnSuccess(dbHelper::saveCity));
+    public Completable chooseCity(CityDataModel city) {
+        return Completable.fromSingle(networkHelper.getCityDetails(city.getCityId())
+                .map(cityDetails -> mapper.getCityDataModelWithCoords(city, cityDetails))
+                .doOnSuccess(cityDataModel -> dbHelper.saveCity(cityDataModel).subscribe()));
     }
 
     @Override

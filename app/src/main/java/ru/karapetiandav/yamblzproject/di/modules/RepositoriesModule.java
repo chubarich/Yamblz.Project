@@ -29,7 +29,8 @@ public class RepositoriesModule {
     @Provides
     @Singleton
     @NonNull
-    WeatherRepository provideWeatherRepository(NetworkHelper networkHelper, WeatherMapper mapper) {
-        return new WeatherRepositoryImpl(networkHelper, mapper);
+    WeatherRepository provideWeatherRepository(NetworkHelper networkHelper, WeatherMapper mapper,
+                                               DBHelper dbHelper) {
+        return new WeatherRepositoryImpl(networkHelper, mapper, dbHelper);
     }
 }

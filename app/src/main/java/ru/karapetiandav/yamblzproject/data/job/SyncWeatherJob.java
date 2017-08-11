@@ -43,7 +43,7 @@ public class SyncWeatherJob extends Job {
 //                .flatMap(city -> networkHelper.getCurrentWeather(city.getCityId()))
 //                .map(WeatherDataModel::valueOf)
 //                .doOnSuccess(preferenceHelper::saveWeather)
-//                .subscribe();
+//                .subscribeOnCityChanges();
         return Result.SUCCESS;
     }
 }

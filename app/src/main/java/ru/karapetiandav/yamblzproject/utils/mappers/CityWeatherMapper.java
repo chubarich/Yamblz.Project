@@ -16,7 +16,8 @@ public class CityWeatherMapper {
         this.utils = utils;
     }
 
-    public CityWeatherViewModel get(CityDataModel city, WeatherDataModel currentWeather) {
+    public CityWeatherViewModel getCityWeatherViewModel(CityDataModel city,
+                                                        WeatherDataModel currentWeather) {
         return new CityWeatherViewModel(
                 cityMapper.getViewModel(city),
                 utils.formatTemperature(currentWeather.getTemp()),

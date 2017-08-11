@@ -9,7 +9,7 @@ import io.reactivex.Single;
 import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
 
 public interface CitiesRepository {
-    Observable<CityDataModel> subscribeOnCities();
+    Observable<List<CityDataModel>> subscribeOnCities();
     Single<List<CityDataModel>> getCitiesMatches(String input);
     Completable chooseCity(CityDataModel cityDataModel);
     Single<CityDataModel> getCity(String cityId);
