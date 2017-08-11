@@ -1,8 +1,13 @@
 package ru.karapetiandav.yamblzproject.ui.adapters;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +25,11 @@ public class AddCityAdapter extends RecyclerView.Adapter<AddCityAdapter.CitiesVi
 
     private List<CityViewModel> cities = new ArrayList<>();
     private OnCityClickListener onCityClickListener;
+    private Context context;
+
+    public AddCityAdapter(Context context) {
+        this.context = context;
+    }
 
     @Override
     public CitiesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,8 +41,18 @@ public class AddCityAdapter extends RecyclerView.Adapter<AddCityAdapter.CitiesVi
     @Override
     public void onBindViewHolder(CitiesViewHolder holder, int position) {
         CityViewModel viewModel = cities.get(position);
-        //todo не разделять запятыми в маппере
-        holder.cityTV.setText(viewModel.getCityName() + ", " + viewModel.getCountry());
+
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        String cityName = viewModel.getCityName();
+        SpannableString redSpannable= new SpannableString(cityName);
+        redSpannable.setSpan(new ForegroundColorSpan(
+                ContextCompat.getColor(context, R.color.red)), 0, 1, 0);
+        builder.append(redSpannable);
+
+        holder.cityTV.setText(builder, TextView.BufferType.SPANNABLE);
+
+//        holder.cityTV.setText(viewModel.getCityName());
+        holder.countryTV.setText(viewModel.getCountry());
     }
 
     @Override
@@ -52,6 +72,7 @@ public class AddCityAdapter extends RecyclerView.Adapter<AddCityAdapter.CitiesVi
     class CitiesViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.city_row_textview) TextView cityTV;
+        @BindView(R.id.country_row_textview) TextView countryTV;
 
         CitiesViewHolder(View itemView) {
             super(itemView);

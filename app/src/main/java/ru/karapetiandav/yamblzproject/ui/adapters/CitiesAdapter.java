@@ -28,7 +28,6 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
 
     public CitiesAdapter(Context context) {
         this.context = context;
-        setHasStableIds(true);
     }
 
     @Override
@@ -47,11 +46,6 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
         holder.tempTV.setText(cityWeather.getTemp());
         holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, cityWeather.getColor()));
 
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
     }
 
     @Override

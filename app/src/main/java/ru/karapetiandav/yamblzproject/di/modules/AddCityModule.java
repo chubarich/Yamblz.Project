@@ -1,5 +1,6 @@
 package ru.karapetiandav.yamblzproject.di.modules;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import dagger.Module;
@@ -31,8 +32,8 @@ public class AddCityModule {
     @Provides
     @AddCityScope
     @NonNull
-    AddCityAdapter provideAddCityAdapter() {
-        return new AddCityAdapter();
+    AddCityAdapter provideAddCityAdapter(Context context) {
+        return new AddCityAdapter(context);
     }
 
     @Provides

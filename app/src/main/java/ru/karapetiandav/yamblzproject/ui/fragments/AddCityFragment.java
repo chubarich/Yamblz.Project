@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,9 +26,9 @@ import ru.karapetiandav.yamblzproject.App;
 import ru.karapetiandav.yamblzproject.R;
 import ru.karapetiandav.yamblzproject.di.modules.AddCityModule;
 import ru.karapetiandav.yamblzproject.ui.adapters.AddCityAdapter;
-import ru.karapetiandav.yamblzproject.ui.views.AddCityView;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.presenters.AddCityPresenter;
+import ru.karapetiandav.yamblzproject.ui.views.AddCityView;
 
 public class AddCityFragment extends Fragment implements AddCityView {
 
@@ -38,6 +39,7 @@ public class AddCityFragment extends Fragment implements AddCityView {
     @Inject
     AddCityPresenter<AddCityView> presenter;
 
+    @BindView(R.id.yandex_logo) ImageView yandexLogo;
     @BindView(R.id.input_city_edittext) EditText inputCityET;
     @BindView(R.id.cities_recyclerview) RecyclerView recyclerView;
     @BindView(R.id.no_results_textview) TextView noResultsTV;
@@ -80,6 +82,7 @@ public class AddCityFragment extends Fragment implements AddCityView {
         noResultsTV.setVisibility(View.GONE);
         errorTV.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
+        yandexLogo.setVisibility(View.GONE);
         adapter.changeDataSet(cities);
     }
 

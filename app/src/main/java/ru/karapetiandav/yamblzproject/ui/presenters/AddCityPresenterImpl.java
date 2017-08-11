@@ -94,4 +94,6 @@ public class AddCityPresenterImpl extends BasePresenter<AddCityView>
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(view::close, Throwable::printStackTrace);
     }
+
+
 }
