@@ -27,6 +27,7 @@ import ru.karapetiandav.yamblzproject.R;
 import ru.karapetiandav.yamblzproject.di.modules.CitiesModule;
 import ru.karapetiandav.yamblzproject.ui.activities.AddCityActivity;
 import ru.karapetiandav.yamblzproject.ui.adapters.CitiesAdapter;
+import ru.karapetiandav.yamblzproject.ui.callbacks.TitleCallback;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.entities.CityWeatherViewModel;
 import ru.karapetiandav.yamblzproject.ui.presenters.CitiesPresenter;
@@ -37,6 +38,7 @@ public class CitiesFragment extends Fragment implements CitiesView {
     private static final int SPAN_COUNT_DEFAULT = 2;
 
     private OnCitySelected onCitySelected;
+    private TitleCallback titleCallback;
 
     @BindView(R.id.cities_weather_recyclerview) RecyclerView recyclerView;
     @BindView(R.id.no_city_added_textview) TextView noCitiesTV;
@@ -74,6 +76,7 @@ public class CitiesFragment extends Fragment implements CitiesView {
         ButterKnife.bind(this, view);
         presenter.onAttach(this);
         setUpViews();
+        titleCallback.setTitle(getString(R.string.navigation_cities_text));
         return view;
     }
 
@@ -159,10 +162,7 @@ public class CitiesFragment extends Fragment implements CitiesView {
     }
 
     private void castContextToListener(Context context) {
-        try {
-            onCitySelected = (OnCitySelected) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement OnCitySelected");
-        }
+        titleCallback = (TitleCallback) context;
+        onCitySelected = (OnCitySelected) context;
     }
 }

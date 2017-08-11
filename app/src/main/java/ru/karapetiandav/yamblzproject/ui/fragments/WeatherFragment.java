@@ -1,6 +1,7 @@
 package ru.karapetiandav.yamblzproject.ui.fragments;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import ru.karapetiandav.yamblzproject.App;
 import ru.karapetiandav.yamblzproject.R;
 import ru.karapetiandav.yamblzproject.di.modules.WeatherModule;
 import ru.karapetiandav.yamblzproject.ui.adapters.WeatherAdapter;
+import ru.karapetiandav.yamblzproject.ui.callbacks.TitleCallback;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.entities.WeatherViewModel;
 import ru.karapetiandav.yamblzproject.ui.presenters.WeatherPresenter;
@@ -32,6 +34,8 @@ public class WeatherFragment extends Fragment implements WeatherView {
 
     private static final String CITY_KEY = "city_key";
     private static final int SPAN_COUNT_DEFAULT = 2;
+
+    private TitleCallback titleCallback;
 
     @Inject WeatherPresenter<WeatherView> weatherPresenter;
     @Inject WeatherAdapter weatherAdapter;
@@ -51,6 +55,17 @@ public class WeatherFragment extends Fragment implements WeatherView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.getAppComponent().plusWeatherComponent(new WeatherModule()).inject(this);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            titleCallback = (TitleCallback) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity + " must implement TitleCallback");
+        }
     }
 
     @Override
@@ -90,7 +105,7 @@ public class WeatherFragment extends Fragment implements WeatherView {
 
     @Override
     public void showTitle(String title) {
-
+        titleCallback.setTitle(title);
     }
 
     @Override

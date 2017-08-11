@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.karapetiandav.yamblzproject.R;
+import ru.karapetiandav.yamblzproject.ui.callbacks.TitleCallback;
 import ru.karapetiandav.yamblzproject.ui.fragments.AboutFragment;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.fragments.CitiesFragment;
@@ -22,7 +23,7 @@ import ru.karapetiandav.yamblzproject.ui.fragments.SettingsFragment;
 import ru.karapetiandav.yamblzproject.ui.fragments.WeatherFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CitiesFragment.OnCitySelected {
+        implements NavigationView.OnNavigationItemSelectedListener, CitiesFragment.OnCitySelected, TitleCallback {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.drawer_layout)
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         if (savedInstanceState == null) {
-            navigationView.setCheckedItem(R.id.nav_weather);
-            setTitle(navigationView.getMenu().findItem(R.id.nav_weather).getTitle());
+            navigationView.setCheckedItem(R.id.nav_cities);
+            setTitle(navigationView.getMenu().findItem(R.id.nav_cities).getTitle());
             fragmentManager.beginTransaction()
                     .replace(R.id.container, new CitiesFragment())
                     .commit();
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.nav_weather:
+            case R.id.nav_cities :
                 fragmentClass = CitiesFragment.class;
                 break;
             case R.id.nav_settings:
@@ -113,5 +114,10 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.container, WeatherFragment.newInstance(city))
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public void setTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 }

@@ -10,9 +10,9 @@
     <string name="api_base_url" translatable="false">http://api.openweathermap.org/</string>
 
     <!--Navigation drawer strings-->
-    <string name="navigation_weather_text">Weather</string>
+    <string name="navigation_cities_text">Places</string>
     <string name="navigation_settings_text">Settings</string>
-    <string name="navigation_about_text">About app</string>
+    <string name="navigation_about_text">About</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
 

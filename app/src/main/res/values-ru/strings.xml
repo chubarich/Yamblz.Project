@@ -14,7 +14,7 @@
     </string-array>
 
     <!--navigation drawer-->
-    <string name="navigation_weather_text">Погода</string>
+    <string name="navigation_cities_text">Места</string>
     <string name="navigation_settings_text">Настройки</string>
     <string name="navigation_about_text">О приложении</string>
     <string name="navigation_city_selection">Выбор города</string>
@@ -38,4 +38,5 @@
     <string name="night_label">Ночь</string>
     <string name="today">Сегодня</string>
     <string name="tomorrow">Завтра</string>
+    <string name="pref_city_key" translatable="false"></string>
 </resources>
