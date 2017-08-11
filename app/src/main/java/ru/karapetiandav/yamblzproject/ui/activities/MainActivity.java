@@ -19,6 +19,7 @@ import ru.karapetiandav.yamblzproject.ui.fragments.AboutFragment;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.fragments.CitiesFragment;
 import ru.karapetiandav.yamblzproject.ui.fragments.SettingsFragment;
+import ru.karapetiandav.yamblzproject.ui.fragments.WeatherFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, CitiesFragment.OnCitySelected {
@@ -106,7 +107,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onCitySelected(CityViewModel city) {
-
+    public void selectCity(CityViewModel city) {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, WeatherFragment.newInstance(city))
+                .addToBackStack(null)
+                .commit();
     }
 }

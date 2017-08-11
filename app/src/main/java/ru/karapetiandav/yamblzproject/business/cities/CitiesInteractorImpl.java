@@ -2,8 +2,8 @@ package ru.karapetiandav.yamblzproject.business.cities;
 
 
 import io.reactivex.Observable;
-import ru.karapetiandav.yamblzproject.data.repositories.cities.CitiesRepository;
-import ru.karapetiandav.yamblzproject.data.repositories.weather.WeatherRepository;
+import ru.karapetiandav.yamblzproject.data.repositories.CitiesRepository;
+import ru.karapetiandav.yamblzproject.data.repositories.WeatherRepository;
 import ru.karapetiandav.yamblzproject.ui.entities.CityWeatherViewModel;
 import ru.karapetiandav.yamblzproject.utils.mappers.CityWeatherMapper;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;

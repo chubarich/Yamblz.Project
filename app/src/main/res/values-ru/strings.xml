@@ -23,17 +23,17 @@
 
     <!--AboutFragment-->
     <string name="text_about_app">
-        Это учебное приложение разрабатываемое в рамках проекта \"Мобилизация\"
+        Это учебное приложение,разрабатываемое в рамках проекта \"Мобилизация\"
     </string>
 
-    <string name="weather_fragment_today">Сегодня</string>
-    <string name="weather_fragment_temp">Температура</string>
-    <string name="weather_fragment_pressure">Давление</string>
-    <string name="weather_fragment_humidity">Влажность</string>
-    <string name="pressure_measure_unit">мм. рт. ст.</string>
-    <string name="temp_measure_unit">°C</string>
-    <string name="default_city_name">Москва</string>
+    <string name="pressure_label">Давление</string>
+    <string name="humidity_label">Влажность</string>
     <string name="no_city_added">Не добавлено ни одного города</string>
     <string name="format_pressure">%s кПа</string>
     <string name="format_wind">%s м/с</string>
+    <string name="wind_label">Ветер</string>
+    <string name="day_label">День</string>
+    <string name="evening_label">Вечер</string>
+    <string name="morning_label">Утро</string>
+    <string name="night_label">Ночь</string>
 </resources>

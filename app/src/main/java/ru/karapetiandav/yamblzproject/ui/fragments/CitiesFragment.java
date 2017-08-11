@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.karapetiandav.yamblzproject.App;
 import ru.karapetiandav.yamblzproject.R;
-import ru.karapetiandav.yamblzproject.di.module.CitiesModule;
+import ru.karapetiandav.yamblzproject.di.modules.CitiesModule;
 import ru.karapetiandav.yamblzproject.ui.activities.AddCityActivity;
 import ru.karapetiandav.yamblzproject.ui.adapters.CitiesAdapter;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
@@ -30,6 +30,8 @@ import ru.karapetiandav.yamblzproject.ui.presenters.CitiesPresenter;
 import ru.karapetiandav.yamblzproject.ui.views.CitiesView;
 
 public class CitiesFragment extends Fragment implements CitiesView {
+
+    private OnCitySelected onCitySelected;
 
     @BindView(R.id.cities_weather_recyclerview) RecyclerView recyclerView;
     @BindView(R.id.no_city_added_textview) TextView noCitiesTV;
@@ -50,6 +52,11 @@ public class CitiesFragment extends Fragment implements CitiesView {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        try {
+            onCitySelected = (OnCitySelected) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnCitySelected");
+        }
     }
 
     @Nullable
@@ -72,7 +79,12 @@ public class CitiesFragment extends Fragment implements CitiesView {
         recyclerView.setLayoutManager(new LinearLayoutManager(
                 getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
-        adapter.setOnCityWeatherClickListener(presenter::onCityWeatherClick);
+        adapter.setOnCityClickListener(presenter::onCityClick);
+    }
+
+    @Override
+    public void showWeather(CityViewModel city) {
+        onCitySelected.selectCity(city);
     }
 
     @Override
@@ -106,6 +118,12 @@ public class CitiesFragment extends Fragment implements CitiesView {
     }
 
     public interface OnCitySelected {
-        void onCitySelected(CityViewModel city);
+        void selectCity(CityViewModel city);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDetach();
     }
 }

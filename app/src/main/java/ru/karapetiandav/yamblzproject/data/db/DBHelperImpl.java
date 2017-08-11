@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.subjects.ReplaySubject;
 import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
 import ru.karapetiandav.yamblzproject.di.qualifiers.DbName;
@@ -51,11 +52,18 @@ public class DBHelperImpl extends SQLiteOpenHelper implements DBHelper {
 
     @Override
     public Completable saveCity(CityDataModel cityDataModel) {
-        int delete = cupboard().withDatabase(getWritableDatabase())
-                .delete(CityDataModel.class, "id = ?", cityDataModel.getId());
-        long result = cupboard().withDatabase(getWritableDatabase())
+        cupboard().withDatabase(getWritableDatabase())
+                .delete(CityDataModel.class, "cityId = ?", cityDataModel.getCityId());
+        cupboard().withDatabase(getWritableDatabase())
                 .put(cityDataModel);
         citiesSubject.onNext(cityDataModel);
         return Completable.complete();
+    }
+
+    @Override
+    public Single<CityDataModel> getCity(String cityId) {
+        CityDataModel city = cupboard().withDatabase(getReadableDatabase()).query(CityDataModel.class)
+                .withSelection("cityId = ?", cityId).get();
+        return Single.fromCallable(() -> city);
     }
 }

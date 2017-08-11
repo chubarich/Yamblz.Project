@@ -1,6 +1,9 @@
 package ru.karapetiandav.yamblzproject.ui.presenters;
 
-import ru.karapetiandav.yamblzproject.business.weather.WeatherInteractor;
+import java.util.List;
+
+import ru.karapetiandav.yamblzproject.business.weather.GetForecastUseCase;
+import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.entities.WeatherViewModel;
 import ru.karapetiandav.yamblzproject.ui.views.WeatherView;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;
@@ -8,34 +11,43 @@ import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;
 public class WeatherPresenterImpl extends BasePresenter<WeatherView>
         implements WeatherPresenter<WeatherView> {
 
-    private WeatherInteractor weatherInteractor;
-    private RxSchedulers rxSchedulers;
+    private GetForecastUseCase getForecastUseCase;
+    private RxSchedulers schedulers;
 
-    public WeatherPresenterImpl(WeatherInteractor weatherInteractor,
-                                RxSchedulers rxSchedulers) {
-        this.weatherInteractor = weatherInteractor;
-        this.rxSchedulers = rxSchedulers;
+    private CityViewModel city;
+
+    public WeatherPresenterImpl(GetForecastUseCase getForecastUseCase,
+                                RxSchedulers schedulers) {
+        this.getForecastUseCase = getForecastUseCase;
+        this.schedulers = schedulers;
     }
 
     @Override
-    public void onAttach(WeatherView view) {
-        super.onAttach(view);
+    public void onCityRestored(CityViewModel city) {
+        this.city = city;
+        getView().showTitle(city.getCityName());
         loadWeather();
     }
 
     private void loadWeather() {
-        disposeOnDetach((weatherInteractor.getWeather()
-                .subscribeOn(rxSchedulers.getIOScheduler())
-                .observeOn(rxSchedulers.getMainThreadScheduler())
+        disposeOnDetach((getForecastUseCase.execute(city.getCityId())
+                .observeOn(schedulers.getMainThreadScheduler())
+                .doAfterTerminate(getView()::hideLoading)
+                .subscribeOn(schedulers.getIOScheduler())
+                .observeOn(schedulers.getMainThreadScheduler())
                 .subscribe(this::handleSuccess, this::handleError)));
     }
 
-    private void handleSuccess(WeatherViewModel weatherViewModel) {
-        getView().showWeather(weatherViewModel);
+    private void handleSuccess(List<WeatherViewModel> weatherList) {
+        getView().showWeather(weatherList);
     }
 
     private void handleError(Throwable throwable) {
         getView().showError();
     }
 
+    @Override
+    public void onSwipeToRefresh() {
+        loadWeather();
+    }
 }

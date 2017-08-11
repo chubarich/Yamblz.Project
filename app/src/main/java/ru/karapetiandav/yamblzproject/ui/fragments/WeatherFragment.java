@@ -3,12 +3,16 @@ package ru.karapetiandav.yamblzproject.ui.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -16,45 +20,79 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.karapetiandav.yamblzproject.App;
 import ru.karapetiandav.yamblzproject.R;
-import ru.karapetiandav.yamblzproject.di.module.WeatherModule;
+import ru.karapetiandav.yamblzproject.di.modules.WeatherModule;
+import ru.karapetiandav.yamblzproject.ui.adapters.WeatherAdapter;
+import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.entities.WeatherViewModel;
 import ru.karapetiandav.yamblzproject.ui.presenters.WeatherPresenter;
 import ru.karapetiandav.yamblzproject.ui.views.WeatherView;
 
-import static ru.karapetiandav.yamblzproject.R.id.humidity;
-import static ru.karapetiandav.yamblzproject.R.id.pressure;
-
 public class WeatherFragment extends Fragment implements WeatherView {
 
-    @Inject
-    WeatherPresenter<WeatherView> weatherPresenter;
+    private static final String CITY_KEY = "city_key";
 
-    @BindView(R.id.temp_degree) TextView tempDegreeTextView;
-    @BindView(R.id.today_date) TextView todayDateTextView;
-    @BindView(pressure) TextView pressureTextView;
-    @BindView(humidity) TextView humidityTextView;
-    @BindView(R.id.weather_status_image) ImageView weatherStatusImage;
+    @Inject WeatherPresenter<WeatherView> weatherPresenter;
+    @Inject WeatherAdapter weatherAdapter;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_weather, container, false);
-        ButterKnife.bind(this, view);
-        App.getAppComponent().plusWeatherComponent(new WeatherModule()).inject(this);
-        weatherPresenter.onAttach(this);
-        return view;
+    @BindView(R.id.weather_swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.weather_recycler_view) RecyclerView recyclerView;
+
+    public static WeatherFragment newInstance(CityViewModel city) {
+        WeatherFragment fragment = new WeatherFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(CITY_KEY, city);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
-    public void showWeather(WeatherViewModel weatherViewModel) {
-        tempDegreeTextView.setText(weatherViewModel.getTemp());
-        pressureTextView.setText(weatherViewModel.getPressure());
-        humidityTextView.setText(weatherViewModel.getHumidity());
-        weatherStatusImage.setImageResource(weatherViewModel.getImageResourceId());
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        App.getAppComponent().plusWeatherComponent(new WeatherModule()).inject(this);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_weather, container, false);
+        ButterKnife.bind(this, view);
+        setUpLayout();
+        weatherPresenter.onAttach(this);
+        CityViewModel city =  getArguments().getParcelable(CITY_KEY);
+        weatherPresenter.onCityRestored(city);
+        return view;
+    }
+
+    private void setUpLayout() {
+        swipeRefreshLayout.setOnRefreshListener(weatherPresenter::onSwipeToRefresh);
+        recyclerView.setLayoutManager(
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(weatherAdapter);
+    }
+
+    @Override
+    public void showWeather(List<WeatherViewModel> weatherList) {
+        weatherAdapter.updateData(weatherList);
     }
 
     @Override
     public void showError() {
         Toast.makeText(getActivity(), getString(R.string.error_no_data), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showTitle(String title) {
+
+    }
+
+    @Override
+    public void showLoading() {
+        swipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void hideLoading() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

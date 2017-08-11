@@ -6,8 +6,10 @@ import ru.karapetiandav.yamblzproject.BuildConfig;
 import ru.karapetiandav.yamblzproject.data.network.api.CityApi;
 import ru.karapetiandav.yamblzproject.data.network.api.CityApiEndpoints;
 import ru.karapetiandav.yamblzproject.data.network.api.WeatherApi;
+import ru.karapetiandav.yamblzproject.data.network.api.WeatherApiEndpoints;
 import ru.karapetiandav.yamblzproject.data.network.model.city.autocomplete.CitiesResponse;
 import ru.karapetiandav.yamblzproject.data.network.model.city.details.CityDetails;
+import ru.karapetiandav.yamblzproject.data.network.model.weather.ForecastResponse;
 import ru.karapetiandav.yamblzproject.data.network.model.weather.WeatherResponse;
 
 public class NetworkHelperImpl implements NetworkHelper {
@@ -34,5 +36,11 @@ public class NetworkHelperImpl implements NetworkHelper {
     @Override
     public Single<WeatherResponse> getCurrentWeather(String lat, String lon) {
         return weatherApi.getCurrentWeather(lat, lon, BuildConfig.OPEN_WEATHER_MAP_API_KEY);
+    }
+
+    @Override
+    public Single<ForecastResponse> getForecast(String lat, String lon) {
+        return weatherApi.getForecast(lat, lon, WeatherApiEndpoints.COUNT_DEFAULT,
+                BuildConfig.OPEN_WEATHER_MAP_API_KEY);
     }
 }

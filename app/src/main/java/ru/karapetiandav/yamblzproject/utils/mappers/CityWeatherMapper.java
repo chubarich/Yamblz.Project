@@ -2,7 +2,7 @@ package ru.karapetiandav.yamblzproject.utils.mappers;
 
 
 import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
-import ru.karapetiandav.yamblzproject.data.model.CurrentWeatherDataModel;
+import ru.karapetiandav.yamblzproject.data.model.WeatherDataModel;
 import ru.karapetiandav.yamblzproject.ui.entities.CityWeatherViewModel;
 import ru.karapetiandav.yamblzproject.utils.Utils;
 
@@ -16,7 +16,7 @@ public class CityWeatherMapper {
         this.utils = utils;
     }
 
-    public CityWeatherViewModel get(CityDataModel city, CurrentWeatherDataModel currentWeather) {
+    public CityWeatherViewModel get(CityDataModel city, WeatherDataModel currentWeather) {
         return new CityWeatherViewModel(
                 cityMapper.getViewModel(city),
                 utils.formatTemperature(currentWeather.getTemp()),

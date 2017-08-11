@@ -1,12 +1,6 @@
 package ru.karapetiandav.yamblzproject.utils;
 
-import android.annotation.TargetApi;
 import android.content.res.Resources;
-import android.os.Build;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import ru.karapetiandav.yamblzproject.R;
 
@@ -33,38 +27,14 @@ public class Utils {
                 String.valueOf(Math.round(wind)));
     }
 
-    public String convertUnixTimeToString(long timeInMillis) {
-        Date date = new Date(timeInMillis);
-        return resources.getString(R.string.weather_fragment_today) + " " +
-                new SimpleDateFormat("d MMM").format(date);
+    public String formatTemperature(double temp) {
+        temp = temp - 273.15;
+        return String.format(resources.getString(R.string.format_temp),
+                String.valueOf(Math.round(temp)));
     }
 
-    public String formatTemperature(double temperature) {
-        if (resources.getString(R.string.pressure_measure_unit).equals("hpa")) {
-            return (int) Math.floor((temperature - 273) * 1.8 + 32) + resources.getString(R.string.temp_measure_unit);
-        } else {
-            return (int) Math.floor(temperature - 273) + resources.getString(R.string.temp_measure_unit);
-        }
-    }
-
-    public String formatPressure(float pressure) {
-        int pressureInt = Math.round(pressure);
-        if (getCurrentLocale() == Locale.US) {
-            return resources.getString(R.string.weather_fragment_pressure) + " " + pressureInt +
-                    " " + resources.getString(R.string.pressure_measure_unit);
-        } else {
-            return resources.getString(R.string.weather_fragment_pressure) + " " + Math.round(pressureInt * 0.750) +
-                    " " + resources.getString(R.string.pressure_measure_unit);
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.N)
-    public Locale getCurrentLocale() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return resources.getConfiguration().getLocales().get(0);
-        } else {
-            return resources.getConfiguration().locale;
-        }
+    public String formatDayOfWeek(int date) {
+        return "Tomorrow";
     }
 
     public int getIconResourceForWeatherId(int weatherId) {

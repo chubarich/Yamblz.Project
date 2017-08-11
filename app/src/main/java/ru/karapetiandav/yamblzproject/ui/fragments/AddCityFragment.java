@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.karapetiandav.yamblzproject.App;
 import ru.karapetiandav.yamblzproject.R;
-import ru.karapetiandav.yamblzproject.di.module.AddCityModule;
+import ru.karapetiandav.yamblzproject.di.modules.AddCityModule;
 import ru.karapetiandav.yamblzproject.ui.adapters.AddCityAdapter;
 import ru.karapetiandav.yamblzproject.ui.views.AddCityView;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;

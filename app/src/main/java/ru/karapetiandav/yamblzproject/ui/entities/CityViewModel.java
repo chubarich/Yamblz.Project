@@ -1,7 +1,10 @@
 package ru.karapetiandav.yamblzproject.ui.entities;
 
 
-public final class CityViewModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public final class CityViewModel implements Parcelable {
 
     private final String cityId;
     private final String cityName;
@@ -11,6 +14,12 @@ public final class CityViewModel {
         this.cityId = cityId;
         this.cityName = cityName;
         this.country = country;
+    }
+
+    protected CityViewModel(Parcel in) {
+        cityId = in.readString();
+        cityName = in.readString();
+        country = in.readString();
     }
 
     public String getCityId() {
@@ -39,4 +48,28 @@ public final class CityViewModel {
         return getCountry() != null ? getCountry().equals(viewModel.getCountry()) : viewModel.getCountry() == null;
 
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(cityId);
+        dest.writeString(cityName);
+        dest.writeString(country);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<CityViewModel> CREATOR = new Creator<CityViewModel>() {
+        @Override
+        public CityViewModel createFromParcel(Parcel in) {
+            return new CityViewModel(in);
+        }
+
+        @Override
+        public CityViewModel[] newArray(int size) {
+            return new CityViewModel[size];
+        }
+    };
 }

@@ -17,11 +17,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.karapetiandav.yamblzproject.R;
+import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.entities.CityWeatherViewModel;
 
 public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesViewHolder> {
 
-    private OnCityWeatherClickListener onCityWeatherClickListener;
+    private OnCityClickListener onCityClickListener;
     private List<CityWeatherViewModel> data = new ArrayList<>();
     private Context context;
 
@@ -71,9 +72,9 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
         }
     }
 
-    public void setOnCityWeatherClickListener(
-            OnCityWeatherClickListener onCityWeatherClickListener) {
-        this.onCityWeatherClickListener = onCityWeatherClickListener;
+    public void setOnCityClickListener(
+            OnCityClickListener onCityClickListener) {
+        this.onCityClickListener = onCityClickListener;
     }
 
     class CitiesViewHolder extends RecyclerView.ViewHolder {
@@ -87,12 +88,12 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
         public CitiesViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(v -> onCityWeatherClickListener
-                    .onCityWeatherClick(data.get(getAdapterPosition())));
+            itemView.setOnClickListener(v -> onCityClickListener
+                    .onCityClick(data.get(getAdapterPosition()).getCityViewModel()));
         }
     }
 
-    public interface OnCityWeatherClickListener {
-        void onCityWeatherClick(CityWeatherViewModel item);
+    public interface OnCityClickListener {
+        void onCityClick(CityViewModel city);
     }
 }

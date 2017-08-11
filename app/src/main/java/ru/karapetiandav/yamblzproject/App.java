@@ -8,9 +8,9 @@ import com.facebook.stetho.Stetho;
 
 import ru.karapetiandav.yamblzproject.data.job.SyncWeatherJob;
 import ru.karapetiandav.yamblzproject.data.job.SyncWeatherJobCreator;
-import ru.karapetiandav.yamblzproject.di.component.AppComponent;
-import ru.karapetiandav.yamblzproject.di.component.DaggerAppComponent;
-import ru.karapetiandav.yamblzproject.di.module.AppModule;
+import ru.karapetiandav.yamblzproject.di.components.AppComponent;
+import ru.karapetiandav.yamblzproject.di.components.DaggerAppComponent;
+import ru.karapetiandav.yamblzproject.di.modules.AppModule;
 
 public class App extends Application {
 

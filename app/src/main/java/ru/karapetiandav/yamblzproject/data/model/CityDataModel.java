@@ -3,7 +3,7 @@ package ru.karapetiandav.yamblzproject.data.model;
 
 public class CityDataModel {
 
-    private String id;
+    private String cityId;
     private String city;
     private String country;
     private double lat;
@@ -12,16 +12,16 @@ public class CityDataModel {
     public CityDataModel() {
     }
 
-    public CityDataModel(String id, String city, String country, double lat, double lon) {
-        this.id = id;
+    public CityDataModel(String cityId, String city, String country, double lat, double lon) {
+        this.cityId = cityId;
         this.city = city;
         this.country = country;
         this.lat = lat;
         this.lon = lon;
     }
 
-    public String getId() {
-        return id;
+    public String getCityId() {
+        return cityId;
     }
 
     public String getCity() {

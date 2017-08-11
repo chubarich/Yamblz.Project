@@ -36,6 +36,7 @@ public class AddCityPresenterImpl extends BasePresenter<AddCityView>
 
     @Override
     public void onAttach(AddCityView view) {
+        super.onAttach(view);
         this.view = view;
         if (cache.isCacheExist()) {
             List<CityViewModel> cities = cache.getCities();

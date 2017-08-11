@@ -39,7 +39,7 @@ public class CityMapper {
     public CityDataModel getCityDataModelWithCoords(CityDataModel city, CityDetails cityDetails) {
         Location location = cityDetails.getResult().getGeometry().getLocation();
         return new CityDataModel(
-                city.getId(),
+                city.getCityId(),
                 city.getCity(),
                 city.getCountry(),
                 location.getLat(),
@@ -57,7 +57,7 @@ public class CityMapper {
     }
 
     public CityViewModel getViewModel(CityDataModel dataModel) {
-        return new CityViewModel(dataModel.getId(), dataModel.getCity(),
+        return new CityViewModel(dataModel.getCityId(), dataModel.getCity(),
                 dataModel.getCountry());
     }
 

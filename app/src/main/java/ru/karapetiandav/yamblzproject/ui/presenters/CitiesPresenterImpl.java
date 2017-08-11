@@ -2,6 +2,7 @@ package ru.karapetiandav.yamblzproject.ui.presenters;
 
 
 import ru.karapetiandav.yamblzproject.business.cities.CitiesInteractor;
+import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.entities.CityWeatherViewModel;
 import ru.karapetiandav.yamblzproject.ui.views.CitiesView;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;
@@ -12,8 +13,6 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
     private CitiesInteractor citiesInteractor;
     private RxSchedulers rxSchedulers;
 
-    private CitiesView view;
-
     public CitiesPresenterImpl(CitiesInteractor citiesInteractor,
                                RxSchedulers rxSchedulers) {
         this.citiesInteractor = citiesInteractor;
@@ -22,7 +21,7 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
 
     @Override
     public void onAttach(CitiesView view) {
-        this.view = view;
+        super.onAttach(view);
         loadCityWeathers();
     }
 
@@ -34,9 +33,9 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
     }
 
     private void handleSuccess(CityWeatherViewModel city) {
-        view.showCity(city);
-        view.hideLoading();
-        view.showNoCities(false);
+        getView().showCity(city);
+        getView().hideLoading();
+        getView().showNoCities(false);
     }
 
     private void handleError(Throwable throwable) {
@@ -44,13 +43,13 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
     }
 
     @Override
-    public void onCityWeatherClick(CityWeatherViewModel item) {
-
+    public void onCityClick(CityViewModel item) {
+        getView().showWeather(item);
     }
 
     @Override
     public void onAddCityClick() {
-        view.showAddNewCity();
+        getView().showAddNewCity();
     }
 
     @Override

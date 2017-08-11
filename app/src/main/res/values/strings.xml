@@ -5,11 +5,6 @@
     <string name="db_name" translatable="false">cities.db</string>
     <integer name="db_version">1</integer>
 
-    <!--default city-->
-    <integer name="default_city_id">524901</integer>
-    <string name="default_city_name">Moscow</string>
-    <string name="default_country" translatable="false">RU</string>
-
     <!--network-->
     <string name="api_key" translatable="false">ddd67f907c6ad401a791a04e8e9d8b64</string>
     <string name="api_base_url" translatable="false">http://api.openweathermap.org/</string>
@@ -21,7 +16,9 @@
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
 
-    <string name="text_about_app">This training application is developed in the project \"Mobilization\"</string>
+    <string name="text_about_app">
+        This training application is developed in the project \"Mobilization\"
+    </string>
 
     <!--Preferences-->
     <string name="pref_update_time_title">Update frequency</string>
@@ -49,18 +46,19 @@
     <string name="country_key" translatable="false">country</string>
 
     <!--weather_formatting-->
-    <string name="format_temp_metric" translatable="false">%s°</string>
+    <string name="format_temp" translatable="false">%s°</string>
     <string name="format_pressure">%s kPa</string>
     <string name="format_humidity" translatable="false">%s %%</string>
     <string name="format_wind">%s m/s</string>
 
-    <!--WeatherFragment-->
-    <string name="pressure_measure_unit">hpa</string>
-    <string name="temp_measure_unit">°F</string>
-    <string name="weather_fragment_humidity">Humidity</string>
-    <string name="weather_fragment_pressure">Pressure</string>
-    <string name="weather_fragment_temp">Temperature</string>
-    <string name="weather_fragment_today">Today</string>
+    <!--weather-->
+    <string name="humidity_label">Humidity</string>
+    <string name="pressure_label">Pressure</string>
+    <string name="wind_label">Wind</string>
+    <string name="morning_label">Morning</string>
+    <string name="day_label">Day</string>
+    <string name="evening_label">Evening</string>
+    <string name="night_label">Night</string>
 
     <!--City Choosing-->
     <string name="navigation_city_selection">City selection</string>
