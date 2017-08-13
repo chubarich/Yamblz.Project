@@ -38,5 +38,5 @@
     <string name="night_label">Ночь</string>
     <string name="today">Сегодня</string>
     <string name="tomorrow">Завтра</string>
-    <string name="pref_city_key" translatable="false"></string>
+    <string name="yandex_logo_content_descr">Логотип Яндекса</string>
 </resources>

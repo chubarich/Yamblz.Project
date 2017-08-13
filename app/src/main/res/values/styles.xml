@@ -1,8 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -13,13 +11,53 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!--<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="CitiesTextViewTheme">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@android:color/black</item>
+    </style>
+    
+    <style name="AppTheme.InputCityTheme">
+        <item name="android:background">@null</item>
+        <item name="android:padding">@dimen/default_small_padding</item>
+        <item name="android:layout_margin">@dimen/default_small_margin</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">text</item>
+        <item name="android:imeOptions">flagNoExtractUi|actionDone</item>
+    </style>
+    
+    <style name="AppTheme.ToolbarTheme">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+    
+    <style name="AppTheme.RecyclerViewTheme">
+        <item name="android:clipToPadding">false</item>
+        <item name="android:paddingTop">@dimen/default_padding</item>
+    </style>
+    
+    <style name="AppTheme.CardViewTheme" parent="CardView">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="android:layout_marginLeft">@dimen/default_margin</item>
+        <item name="android:layout_marginRight">@dimen/default_margin</item>
+        <item name="android:layout_marginBottom">@dimen/default_margin</item>
+    </style>
+
+    <style name="AppTheme.WhiteTextView" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.WhiteTextView.Bold">
+        <item name="android:textSize">@dimen/default_card_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.Divider">
+        <item name="android:layout_width">@dimen/divider_width</item>
+        <item name="android:layout_height">@dimen/divider_height</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_marginTop">@dimen/default_margin</item>
     </style>
 
 </resources>

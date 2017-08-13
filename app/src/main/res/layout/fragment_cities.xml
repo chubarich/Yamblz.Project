@@ -15,8 +15,7 @@
             android:id="@+id/cities_weather_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingTop="16dp"/>
+            style="@style/AppTheme.RecyclerViewTheme"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -27,7 +26,7 @@
         android:layout_gravity="bottom|end"
         android:src="@drawable/ic_add"
         app:layout_anchor="@+id/cities_weather_recyclerview"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/fab_margin"
         app:layout_anchorGravity="bottom|right|end"
         app:layout_behavior="ru.karapetiandav.yamblzproject.utils.customview.FAB_Float_on_Scroll"/>
 
@@ -36,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_city_added"
-        android:textSize="20sp"
+        android:textSize="@dimen/default_card_text_size"
         android:layout_gravity="center"
         android:visibility="gone"/>
 

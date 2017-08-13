@@ -6,8 +6,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_weather"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary" />
+        style="@style/AppTheme.ToolbarTheme"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/weather_swipe_refresh"
@@ -18,8 +17,7 @@
             android:id="@+id/weather_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingTop="16dp"/>
+            style="@style/AppTheme.RecyclerViewTheme"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

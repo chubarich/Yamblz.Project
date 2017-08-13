@@ -8,23 +8,17 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_add_city"
         android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        style="@style/AppTheme.ToolbarTheme">
 
         <EditText
             android:id="@+id/input_city_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_city_name"
-            android:background="@null"
-            android:padding="8dp"
-            android:layout_margin="8dp"
-            android:maxLines="1"
-            android:inputType="text"
-            android:imeOptions="flagNoExtractUi|actionDone"/>
+            style="@style/AppTheme.InputCityTheme"/>
 
     </android.support.v7.widget.Toolbar>
 
@@ -32,7 +26,7 @@
         android:id="@+id/cities_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:clipToPadding="false"
+        style="@style/AppTheme.RecyclerViewTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -75,7 +69,7 @@
 
     <ImageView
         android:id="@+id/yandex_logo"
-        android:layout_width="100dp"
+        android:layout_width="@dimen/yandex_logo_width"
         android:layout_height="wrap_content"
         android:src="@drawable/yandex_logo"
         app:layout_constraintLeft_toLeftOf="parent"
