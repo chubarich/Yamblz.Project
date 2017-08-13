@@ -30,7 +30,6 @@ public class CitiesRepositoryImpl implements CitiesRepository {
 
     @Override
     public Single<List<CityDataModel>> getCitiesMatches(String text) {
-        //todo здесь посылаем конкретные ошибки
         return networkHelper.getCities(text)
                 .map(cityResponse -> mapper.getCitiesFromResponse(cityResponse));
     }

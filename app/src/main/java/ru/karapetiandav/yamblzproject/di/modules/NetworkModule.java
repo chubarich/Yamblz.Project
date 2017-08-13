@@ -21,15 +21,13 @@ import ru.karapetiandav.yamblzproject.data.network.api.WeatherApi;
 import ru.karapetiandav.yamblzproject.di.qualifiers.WeatherApiBaseUrl;
 
 @Module
-public class  NetworkModule {
-
+public class NetworkModule {
 
     @Provides
     @Singleton
     @NonNull
     @WeatherApiBaseUrl
     String provideWeatherBaseUrl(Resources resources) {
-//        todo убрать
         return resources.getString(R.string.api_base_url);
     }
 

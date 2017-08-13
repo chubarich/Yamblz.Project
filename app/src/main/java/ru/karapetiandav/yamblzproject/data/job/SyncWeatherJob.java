@@ -10,6 +10,8 @@ import com.evernote.android.job.JobRequest;
 import java.util.concurrent.TimeUnit;
 
 import ru.karapetiandav.yamblzproject.R;
+import ru.karapetiandav.yamblzproject.business.usecases.GetForecastUseCase;
+import ru.karapetiandav.yamblzproject.business.usecases.SubscribeOnCityWeathersUseCase;
 import ru.karapetiandav.yamblzproject.data.network.NetworkHelper;
 import ru.karapetiandav.yamblzproject.data.prefs.PreferenceHelper;
 
@@ -21,6 +23,9 @@ public class SyncWeatherJob extends Job {
     private PreferenceHelper preferenceHelper;
     private NetworkHelper networkHelper;
     private Resources resources;
+
+    private GetForecastUseCase getForecastUseCase;
+    private SubscribeOnCityWeathersUseCase subscribeOnCityChanges;
 
     public SyncWeatherJob(PreferenceHelper preferenceHelper, NetworkHelper networkHelper,
                           Resources resources) {
@@ -45,12 +50,9 @@ public class SyncWeatherJob extends Job {
     @NonNull
     @Override
     protected Result onRunJob(Params params) {
-        //todo return
-//        preferenceHelper.getCity()
-//                .flatMap(city -> networkHelper.getCurrentWeather(city.getCityId()))
-//                .map(WeatherDataModel::valueOf)
-//                .doOnSuccess(preferenceHelper::saveWeather)
-//                .subscribeOnCityChanges();
+        subscribeOnCityChanges.execute()
+                .flatMap(cityWeatherViewModel -> getForecastUseCase.execute(cityWeatherViewModel
+                        .getCityViewModel().getCityId()).toObservable()).subscribe();
         return Result.SUCCESS;
     }
 }
