@@ -30,7 +30,7 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
 
     @Override
     public void onCityClick(CityViewModel item) {
-        getView().showWeather(item);
+        getView().showWeatherActivity(item);
     }
 
     @Override
@@ -50,6 +50,8 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
 
     private void loadCityWeathers() {
         disposeOnDetach(citiesInteractor.subscribeOnCityWeathers()
+                .observeOn(rxSchedulers.getMainThreadScheduler())
+                .doOnSubscribe(ignore -> getView().showLoading())
                 .subscribeOn(rxSchedulers.getIOScheduler())
                 .observeOn(rxSchedulers.getMainThreadScheduler())
                 .subscribe(this::handleSuccess, this::handleError));
@@ -58,7 +60,6 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
     private void handleSuccess(CityWeatherViewModel city) {
         getView().showCity(city);
         getView().hideLoading();
-        getView().showNoCities(false);
     }
 
     private void handleError(Throwable throwable) {

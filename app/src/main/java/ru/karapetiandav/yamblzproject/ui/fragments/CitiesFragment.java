@@ -26,6 +26,7 @@ import ru.karapetiandav.yamblzproject.App;
 import ru.karapetiandav.yamblzproject.R;
 import ru.karapetiandav.yamblzproject.di.modules.CitiesModule;
 import ru.karapetiandav.yamblzproject.ui.activities.AddCityActivity;
+import ru.karapetiandav.yamblzproject.ui.activities.WeatherActivity;
 import ru.karapetiandav.yamblzproject.ui.adapters.CitiesAdapter;
 import ru.karapetiandav.yamblzproject.ui.callbacks.TitleCallback;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
@@ -37,7 +38,6 @@ public class CitiesFragment extends Fragment implements CitiesView {
 
     private static final int SPAN_COUNT_DEFAULT = 2;
 
-    private OnCitySelected onCitySelected;
     private TitleCallback titleCallback;
 
     @BindView(R.id.cities_weather_recyclerview) RecyclerView recyclerView;
@@ -117,8 +117,10 @@ public class CitiesFragment extends Fragment implements CitiesView {
     }
 
     @Override
-    public void showWeather(CityViewModel city) {
-        onCitySelected.selectCity(city);
+    public void showWeatherActivity(CityViewModel city) {
+        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+        intent.putExtra(WeatherActivity.TAG, city);
+        startActivity(intent);
     }
 
     @Override
@@ -151,10 +153,6 @@ public class CitiesFragment extends Fragment implements CitiesView {
         startActivity(new Intent(getActivity(), AddCityActivity.class));
     }
 
-    public interface OnCitySelected {
-        void selectCity(CityViewModel city);
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -163,6 +161,5 @@ public class CitiesFragment extends Fragment implements CitiesView {
 
     private void castContextToListener(Context context) {
         titleCallback = (TitleCallback) context;
-        onCitySelected = (OnCitySelected) context;
     }
 }

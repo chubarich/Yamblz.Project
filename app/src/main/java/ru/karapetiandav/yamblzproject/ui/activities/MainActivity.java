@@ -17,21 +17,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.karapetiandav.yamblzproject.R;
 import ru.karapetiandav.yamblzproject.ui.callbacks.TitleCallback;
-import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.fragments.AboutFragment;
 import ru.karapetiandav.yamblzproject.ui.fragments.CitiesFragment;
 import ru.karapetiandav.yamblzproject.ui.fragments.SettingsFragment;
-import ru.karapetiandav.yamblzproject.ui.fragments.WeatherFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CitiesFragment.OnCitySelected,
+        implements NavigationView.OnNavigationItemSelectedListener,
         TitleCallback {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawer;
-    @BindView(R.id.toolbar_add_city)
-    Toolbar toolbar;
+    private static final String TAG = "main_activity_tag";
+
+    @BindView(R.id.drawer_layout) DrawerLayout drawer;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
     private FragmentManager fragmentManager = getFragmentManager();
@@ -133,14 +130,6 @@ public class MainActivity extends AppCompatActivity
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void selectCity(CityViewModel city) {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, WeatherFragment.newInstance(city))
-                .addToBackStack(null)
-                .commit();
     }
 
     @Override

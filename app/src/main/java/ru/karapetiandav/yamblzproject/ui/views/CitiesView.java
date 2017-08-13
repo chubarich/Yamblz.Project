@@ -12,6 +12,6 @@ public interface CitiesView {
     void hideLoading();
     void showError(boolean show);
     void showAddNewCity();
-    void showWeather(CityViewModel city);
+    void showWeatherActivity(CityViewModel city);
     void showCity(CityWeatherViewModel city);
 }

@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:text="@string/no_city_added"
         android:textSize="20sp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -4,6 +4,7 @@ package ru.karapetiandav.yamblzproject.ui.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -73,7 +74,9 @@ public class AddCityActivity extends AppCompatActivity implements AddCityView {
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter.setOnCityClickListener(position -> presenter.onCityClick(position));
         recyclerView.setAdapter(adapter);
-
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
     @Override
