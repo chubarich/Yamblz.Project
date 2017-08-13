@@ -11,11 +11,7 @@ public class Main {
         return temp;
     }
 
-    public double getPressure() {
-        return pressure;
-    }
-
-    public double getHumidity() {
-        return humidity;
+    public void setTemp(double temp) {
+        this.temp = temp;
     }
 }

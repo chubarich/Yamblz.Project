@@ -7,7 +7,6 @@ public class WeatherResponse {
 
     private List<Weather> weather = null;
     private Main main;
-    private Wind wind;
 
     public List<Weather> getWeather() {
         return weather;
@@ -17,7 +16,11 @@ public class WeatherResponse {
         return main;
     }
 
-    public Wind getWind() {
-        return wind;
+    public void setMain(Main main) {
+        this.main = main;
+    }
+
+    public void setWeather(List<Weather> weather) {
+        this.weather = weather;
     }
 }

@@ -17,4 +17,7 @@ public class ForecastResponse {
         return days;
     }
 
+    public void setDays(List<Day> days) {
+        this.days = days;
+    }
 }

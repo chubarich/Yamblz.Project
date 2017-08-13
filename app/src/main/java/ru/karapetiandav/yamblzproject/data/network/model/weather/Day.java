@@ -41,4 +41,32 @@ public class Day {
     public double getDeg() {
         return deg;
     }
+
+    public void setDt(int dt) {
+        this.dt = dt;
+    }
+
+    public void setTemp(Temp temp) {
+        this.temp = temp;
+    }
+
+    public void setPressure(double pressure) {
+        this.pressure = pressure;
+    }
+
+    public void setHumidity(double humidity) {
+        this.humidity = humidity;
+    }
+
+    public void setWeather(List<Weather> weather) {
+        this.weather = weather;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public void setDeg(double deg) {
+        this.deg = deg;
+    }
 }

@@ -34,4 +34,27 @@ public class Temp {
         return morn;
     }
 
+    public void setDay(double day) {
+        this.day = day;
+    }
+
+    public void setMin(double min) {
+        this.min = min;
+    }
+
+    public void setMax(double max) {
+        this.max = max;
+    }
+
+    public void setNight(double night) {
+        this.night = night;
+    }
+
+    public void setEve(double eve) {
+        this.eve = eve;
+    }
+
+    public void setMorn(double morn) {
+        this.morn = morn;
+    }
 }
