@@ -1,8 +1,6 @@
 package ru.karapetiandav.yamblzproject.business;
 
 
-import android.text.TextUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class GetCitiesMatchesUseCase {
     }
 
     public Observable<List<CityViewModel>> execute(String city) {
-        if (TextUtils.isEmpty(city)) {
+        if (city == null || city.trim().length() == 0) {
             return Observable.fromCallable(ArrayList::new);
         }
         return citiesRepository.getCitiesMatches(city)
