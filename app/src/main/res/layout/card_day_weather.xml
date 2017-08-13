@@ -1,0 +1,217 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_weather"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    style="@style/AppTheme.CardViewTheme">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_margin">
+
+        <TextView
+            android:id="@+id/date_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/icon_imageview"
+            app:layout_constraintHorizontal_bias="0.0"
+            style="@style/AppTheme.WhiteTextView.Bold"/>
+
+        <TextView
+            android:id="@+id/temp_max_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/temp_max_text_size"
+            style="@style/AppTheme.WhiteTextView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_textview"
+            app:layout_constraintBottom_toTopOf="@+id/divider1" />
+
+        <ImageView
+            android:id="@+id/icon_imageview"
+            android:layout_width="@dimen/weather_icon_size"
+            android:layout_height="@dimen/weather_icon_size"
+            android:src="@drawable/ic_sun"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:id="@+id/divider1"
+            app:layout_constraintTop_toBottomOf="@+id/icon_imageview"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            style="@style/AppTheme.Divider"/>
+
+        <TextView
+            android:id="@+id/wind_label"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/wind_label"
+            style="@style/AppTheme.WhiteTextView.Bold"
+            android:drawableStart="@drawable/ic_wind"
+            android:drawableLeft="@drawable/ic_wind"
+            android:drawablePadding="@dimen/default_small_padding"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@+id/divider1" />
+
+        <TextView
+            android:id="@+id/wind_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.WhiteTextView.Bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/wind_label"
+            app:layout_constraintBottom_toBottomOf="@+id/wind_label"/>
+
+        <TextView
+            android:id="@+id/humidity_label"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/humidity_label"
+            style="@style/AppTheme.WhiteTextView.Bold"
+            android:drawableStart="@drawable/ic_humidity"
+            android:drawableLeft="@drawable/ic_humidity"
+            android:drawablePadding="@dimen/default_small_padding"
+            android:layout_marginTop="@dimen/default_small_margin"
+            app:layout_constraintTop_toBottomOf="@+id/wind_label" />
+
+        <TextView
+            android:id="@+id/humidity_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.WhiteTextView.Bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/humidity_label"
+            app:layout_constraintBottom_toBottomOf="@+id/humidity_label"/>
+
+        <TextView
+            android:id="@+id/pressure_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pressure_label"
+            android:layout_marginTop="@dimen/default_small_margin"
+            android:drawablePadding="@dimen/default_small_padding"
+            android:drawableStart="@drawable/ic_pressure"
+            android:drawableLeft="@drawable/ic_pressure"
+            app:layout_constraintTop_toBottomOf="@+id/humidity_label"
+            style="@style/AppTheme.WhiteTextView.Bold"/>
+
+        <TextView
+            android:id="@+id/pressure_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/pressure_label"
+            app:layout_constraintBottom_toBottomOf="@+id/pressure_label"
+            style="@style/AppTheme.WhiteTextView.Bold"/>
+
+        <View
+            android:id="@+id/divider2"
+            style="@style/AppTheme.Divider"
+            app:layout_constraintTop_toBottomOf="@+id/pressure_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/morning_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/morning_label"
+            android:layout_marginTop="@dimen/default_margin"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/divider2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/day_label"/>
+
+        <TextView
+            android:id="@+id/day_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day_label"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/morning_label"
+            app:layout_constraintLeft_toRightOf="@+id/morning_label"
+            app:layout_constraintRight_toLeftOf="@+id/evening_label"/>
+
+        <TextView
+            android:id="@+id/evening_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/evening_label"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/morning_label"
+            app:layout_constraintLeft_toRightOf="@+id/day_label"
+            app:layout_constraintRight_toLeftOf="@+id/night_label"/>
+
+        <TextView
+            android:id="@+id/night_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/night_label"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/morning_label"
+            app:layout_constraintLeft_toRightOf="@+id/evening_label"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/morning_temp_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_card_text_size"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="@dimen/default_small_margin"
+            app:layout_constraintTop_toBottomOf="@+id/morning_label"
+            app:layout_constraintLeft_toLeftOf="@+id/morning_label"
+            app:layout_constraintRight_toRightOf="@+id/morning_label"/>
+
+        <TextView
+            android:id="@+id/day_temp_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_card_text_size"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="@dimen/default_small_margin"
+            app:layout_constraintTop_toBottomOf="@+id/day_label"
+            app:layout_constraintLeft_toLeftOf="@+id/day_label"
+            app:layout_constraintRight_toRightOf="@+id/day_label"/>
+
+        <TextView
+            android:id="@+id/evening_temp_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_card_text_size"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="@dimen/default_small_margin"
+            app:layout_constraintTop_toBottomOf="@+id/evening_label"
+            app:layout_constraintLeft_toLeftOf="@+id/evening_label"
+            app:layout_constraintRight_toRightOf="@+id/evening_label"/>
+
+        <TextView
+            android:id="@+id/night_temp_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_card_text_size"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="@dimen/default_small_margin"
+            app:layout_constraintTop_toBottomOf="@+id/night_label"
+            app:layout_constraintLeft_toLeftOf="@+id/night_label"
+            app:layout_constraintRight_toRightOf="@+id/night_label"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

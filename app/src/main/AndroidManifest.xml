@@ -11,24 +11,24 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.cities.CitiesActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
+        <activity android:name=".ui.activities.AddCityActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".ui.activities.MainActivity">
             <intent-filter>
-                <action android:name="ui.cities.CitiesActivity" />
+                <action android:name="ui.cities.AddCityActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activities.WeatherActivity"
+            android:parentActivityName=".ui.activities.MainActivity"/>
     </application>
 
 </manifest>

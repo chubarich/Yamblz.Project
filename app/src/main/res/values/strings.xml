@@ -1,40 +1,38 @@
 <resources>
     <string name="app_name" translatable="false">Yamblz.Project</string>
 
-    <string name="navigation_drawer_open">Открыть боковое меню</string>
-    <string name="navigation_drawer_close">Закрыть боковое меню</string>
+    <!--db-->
+    <string name="db_name" translatable="false">cities.db</string>
+    <integer name="db_version">1</integer>
+
+    <!--network-->
+    <string name="api_key" translatable="false">ddd67f907c6ad401a791a04e8e9d8b64</string>
+    <string name="api_base_url" translatable="false">http://api.openweathermap.org/</string>
 
     <!--Navigation drawer strings-->
-    <string name="navigation_weather_text">Погода</string>
-    <string name="navigation_settings_text">Настройки</string>
-    <string name="navigation_about_text">О приложении</string>
-    <string name="navigation_city_selection">Выбор города</string>
+    <string name="navigation_cities_text">Places</string>
+    <string name="navigation_settings_text">Settings</string>
+    <string name="navigation_about_text">About</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
 
-    <!--AboutFragment strings-->
-    <string name="text_about_app">Это учебное приложение разрабатываемое в рамках проекта \"Мобилизация\"</string>
-
-    <!--Placeholders-->
-    <string name="settings_placeholder_text">Экран с настройками</string>
-    <string name="weather_placeholder_text">Здесь скоро будет отображаться погода :)</string>
-
-    <!--WeatherFragment-->
-    <string name="weather_fragment_today">Сегодня</string>
-    <string name="weather_fragment_temp">Температура</string>
-    <string name="weather_fragment_pressure">Давление</string>
-    <string name="weather_fragment_humidity">Влажность</string>
-    <string name="pressure_measure_unit">мм. рт. ст.</string>
-    <string name="temp_measure_unit">°C</string>
+    <string name="text_about_app">
+        This training application is developed in the project \"Mobilization\"
+    </string>
 
     <!--Preferences-->
-    <string name="pref_update_time_title">Частота обновлений</string>
+    <string name="pref_update_key" translatable="false">pref_update_time</string>
+    <string name="pref_update_time_title">Update frequency</string>
+    <string name="pref_city_title">City</string>
+    <string name="pref_city_key" translatable="false">cities</string>
     <string-array name="pref_update_time_entries">
-        <item>1 час</item>
-        <item>3 часа</item>
-        <item>6 часов</item>
-        <item>12 часов</item>
-        <item>24 часа</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>24 hours</item>
     </string-array>
-    <string-array name="pref_update_time_values">
+    <string-array name="pref_update_time_values" translatable="false">
         <item>60</item>
         <item>180</item>
         <item>360</item>
@@ -43,28 +41,40 @@
     </string-array>
     <string name="pref_update_time_default" translatable="false">180</string>
 
-    <string name="pref_city_key" translatable="false">cities</string>
-    <string name="pref_city_title">Город</string>
-
-    <!--shred_prefs-->
+    <!--Shared Preferences keys-->
     <string name="city_id_key" translatable="false">city_id</string>
     <string name="city_name_key" translatable="false">city_name</string>
     <string name="country_key" translatable="false">country</string>
 
-    <!--cities-->
-    <string name="enter_city_name">Введите название города</string>
-    <string name="no_cities_found">Не найдено ни одного города</string>
-    <string name="error_no_data">Не удалось получить данные</string>
+    <!--weather_formatting-->
+    <string name="format_temp" translatable="false">%s°</string>
+    <string name="format_pressure">%s kPa</string>
+    <string name="format_humidity" translatable="false">%s %%</string>
+    <string name="format_wind">%s m/s</string>
 
-    <!--db-->
-    <string name="db_name" translatable="false">cities.db</string>
-    <integer name="db_version">1</integer>
+    <!--time-->
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="format_day_of_week" translatable="false">EEEE</string>
 
-    <integer name="default_city_id">524901</integer>
-    <string name="default_city_name">Москва</string>
-    <string name="default_country" translatable="false">RU</string>
+    <!--weather-->
+    <string name="humidity_label">Humidity</string>
+    <string name="pressure_label">Pressure</string>
+    <string name="wind_label">Wind</string>
+    <string name="morning_label">Morning</string>
+    <string name="day_label">Day</string>
+    <string name="evening_label">Evening</string>
+    <string name="night_label">Night</string>
 
-    <!--network-->
-    <string name="api_key" translatable="false">1fd56ebafdb3bec85d4b1ac5ae8529eb</string>
-    <string name="api_base_url" translatable="false">http://api.openweathermap.org/</string>
+    <!--City Choosing-->
+    <string name="navigation_city_selection">City selection</string>
+    <string name="enter_city_name">Enter city name</string>
+    <string name="no_cities_found">Did not match any cities</string>
+    <string name="error_no_data">Failed to retrieve data</string>
+    <string name="no_city_added">No city added</string>
+
+    <bool name="isTablet">false</bool>
+
+    <string name="yandex_logo_content_descr">Yandex Logo</string>
+
 </resources>

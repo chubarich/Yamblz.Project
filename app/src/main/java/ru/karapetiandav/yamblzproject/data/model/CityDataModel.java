@@ -1,29 +1,43 @@
 package ru.karapetiandav.yamblzproject.data.model;
 
 
-public final class CityDataModel {
+public class CityDataModel {
 
-    private final int id;
-    private final String name;
-    private final String country;
+    private String cityId;
+    private String city;
+    private String country;
+    private double lat;
+    private double lon;
 
-
-    public CityDataModel(int cityId, String cityName, String countryCode) {
-        this.id = cityId;
-        this.name = cityName;
-        this.country = countryCode;
+    public CityDataModel() {
     }
 
-    public int getId() {
-        return id;
+    public CityDataModel(String cityId, String city, String country, double lat, double lon) {
+        this.cityId = cityId;
+        this.city = city;
+        this.country = country;
+        this.lat = lat;
+        this.lon = lon;
     }
 
-    public String getCityName() {
-        return name;
+    public String getCityId() {
+        return cityId;
     }
 
-    public String getCountryCode() {
+    public String getCity() {
+        return city;
+    }
+
+    public String getCountry() {
         return country;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLon() {
+        return lon;
     }
 
     @Override
@@ -31,11 +45,15 @@ public final class CityDataModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CityDataModel dataModel = (CityDataModel) o;
+        CityDataModel that = (CityDataModel) o;
 
-        if (id != dataModel.id) return false;
-        if (name != null ? !name.equals(dataModel.name) : dataModel.name != null) return false;
-        return country != null ? country.equals(dataModel.country) : dataModel.country == null;
+        if (Double.compare(that.getLat(), getLat()) != 0) return false;
+        if (Double.compare(that.getLon(), getLon()) != 0) return false;
+        if (getCityId() != null ? !getCityId().equals(that.getCityId()) : that.getCityId() != null)
+            return false;
+        if (getCity() != null ? !getCity().equals(that.getCity()) : that.getCity() != null)
+            return false;
+        return getCountry() != null ? getCountry().equals(that.getCountry()) : that.getCountry() == null;
 
     }
 }

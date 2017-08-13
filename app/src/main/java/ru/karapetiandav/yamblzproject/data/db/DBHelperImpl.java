@@ -2,84 +2,125 @@ package ru.karapetiandav.yamblzproject.data.db;
 
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import android.database.sqlite.SQLiteOpenHelper;
 
-import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.subjects.BehaviorSubject;
 import ru.karapetiandav.yamblzproject.data.model.CityDataModel;
-import ru.karapetiandav.yamblzproject.data.model.Language;
+import ru.karapetiandav.yamblzproject.data.model.ForecastDataModel;
+import ru.karapetiandav.yamblzproject.data.model.WeatherDataModel;
 import ru.karapetiandav.yamblzproject.di.qualifiers.DbName;
 import ru.karapetiandav.yamblzproject.di.qualifiers.DbVersion;
 
-public class DBHelperImpl extends SQLiteAssetHelper implements DBHelper {
+import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
-    private static final int ROWS_LIMIT = 20;
+public class DBHelperImpl extends SQLiteOpenHelper implements DBHelper {
+
+    private static final String BY_CITY_ID = "cityId = ?";
+    private BehaviorSubject<List<CityDataModel>> citiesSubject = BehaviorSubject.create();
 
     public DBHelperImpl(Context context,@DbName String name,
                         @DbVersion int version) {
         super(context, name, null, version);
     }
 
+    static {
+        cupboard().register(CityDataModel.class);
+        cupboard().register(WeatherDataModel.class);
+        cupboard().register(ForecastDataModel.class);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        cupboard().withDatabase(db).createTables();
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        cupboard().withDatabase(db).upgradeTables();
     }
 
     @Override
-    public Single<List<CityDataModel>> getCities(String text, Language language) {
-        Log.v("log_tag", Thread.currentThread().toString());
-        SQLiteDatabase db = getReadableDatabase();
-        String tableName = language.equals(Language.RUS)
-                ? CitiesEntry.TABLE_RUS : CitiesEntry.TABLE_ENG;
-        text = prepareTextForQuery(text);
-        Cursor cursor = db.query(
-                tableName,
-                null,
-                CitiesEntry.CITY_NAME + " LIKE ?",
-                new String[]{prepareTextForQuery(text) + "%"},
-                null,
-                null,
-                null,
-                String.valueOf(ROWS_LIMIT));
-        List<CityDataModel> cities = getCitiesFromCursor(cursor);
-        cursor.close();
-        db.close();
-        return Single.fromCallable(() -> cities);
+    public Observable<List<CityDataModel>> subscribeOnCityChanges() {
+        citiesSubject.onNext(getCityList());
+        return citiesSubject;
     }
 
-    private static String prepareTextForQuery(String text) {
-        text = text.toLowerCase();
-        return text.substring(0, 1).toUpperCase() + text.substring(1);
+    @Override
+    public Completable saveCity(CityDataModel city) {
+        return Completable.fromCallable(() -> {
+            cupboard().withDatabase(getWritableDatabase())
+                    .delete(CityDataModel.class, BY_CITY_ID, city.getCityId());
+            cupboard().withDatabase(getWritableDatabase()).put(city);
+            citiesSubject.onNext(getCityList());
+            return Completable.complete();
+        });
     }
 
-    private List<CityDataModel> getCitiesFromCursor(Cursor cursor) {
-        List<CityDataModel> cities = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            CityDataModel cityDataModel = new CityDataModel(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2)
-            );
-            cities.add(cityDataModel);
-        }
-        return cities;
+    @Override
+    public Single<CityDataModel> getCity(String cityId) {
+        return Single.fromCallable(() -> cupboard().withDatabase(getReadableDatabase())
+                .query(CityDataModel.class)
+                .withSelection(BY_CITY_ID, cityId)
+                .get());
     }
 
-    private class CitiesEntry {
+    @Override
+    public Completable saveWeather(WeatherDataModel weather) {
+        return Completable.fromCallable(() -> {
+            cupboard().withDatabase(getWritableDatabase())
+                    .delete(WeatherDataModel.class, BY_CITY_ID, weather.getCityId());
+            cupboard().withDatabase(getWritableDatabase()).put(weather);
+            return Completable.complete();
+        });
+    }
 
-        public static final String TABLE_ENG = "eng";
-        public static final String TABLE_RUS = "rus";
-        public static final String CITY_ID = "id";
-        public static final String CITY_NAME = "name";
-        public static final String COUNTRY = "country";
+    @Override
+    public Single<WeatherDataModel> getWeather(String cityId) {
+       return Single.fromCallable(() -> cupboard().withDatabase(getReadableDatabase())
+                .query(WeatherDataModel.class)
+                .withSelection(BY_CITY_ID, cityId)
+                .get());
+    }
 
-        private CitiesEntry() {
-        }
+    @Override
+    public Completable saveForecastList(List<ForecastDataModel> forecastList) {
+        return Completable.fromCallable(() -> {
+            cupboard().withDatabase(getWritableDatabase())
+                    .delete(ForecastDataModel.class, BY_CITY_ID, forecastList.get(0).getCityId());
+            cupboard().withDatabase(getWritableDatabase()).put(forecastList);
+            return Completable.complete();
+        });
+    }
+
+    @Override
+    public Single<List<ForecastDataModel>> getForecastList(String cityId) {
+        return Single.fromCallable(() -> cupboard().withDatabase(getReadableDatabase())
+                .query(ForecastDataModel.class)
+                .withSelection(BY_CITY_ID, cityId)
+                .list());
+    }
+
+    @Override
+    public Completable removeCity(String cityId) {
+        return Completable.fromCallable(() -> {
+            cupboard().withDatabase(getWritableDatabase())
+                    .delete(CityDataModel.class, BY_CITY_ID, cityId);
+            cupboard().withDatabase(getWritableDatabase())
+                    .delete(WeatherDataModel.class, BY_CITY_ID, cityId);
+            cupboard().withDatabase(getWritableDatabase())
+                    .delete(ForecastDataModel.class, BY_CITY_ID, cityId);
+            return Completable.complete();
+        });
+    }
+
+    private List<CityDataModel> getCityList() {
+        return cupboard().withDatabase(getReadableDatabase())
+                .query(CityDataModel.class).list();
     }
 }

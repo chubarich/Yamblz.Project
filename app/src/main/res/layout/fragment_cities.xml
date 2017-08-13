@@ -1,57 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/input_city_edittext"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_city_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/edittext_background"
-        android:padding="8dp"
-        android:layout_margin="8dp"
-        android:maxLines="1"
-        android:inputType="text"
-        android:imeOptions="flagNoExtractUi|actionDone"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/cities_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/cities_recyclerview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_city_edittext"
-        android:visibility="gone"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cities_weather_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/AppTheme.RecyclerViewTheme"/>
 
-    <TextView
-        android:id="@+id/no_results_textview"
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_city_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_cities_found"
-        style="@style/CitiesTextViewTheme"
-        app:layout_constraintTop_toBottomOf="@+id/input_city_edittext"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"/>
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/ic_add"
+        app:layout_anchor="@+id/cities_weather_recyclerview"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_behavior="ru.karapetiandav.yamblzproject.utils.customview.FAB_Float_on_Scroll"/>
 
     <TextView
-        android:id="@+id/no_data_error_textview"
+        android:id="@+id/no_city_added_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/error_no_data"
-        style="@style/CitiesTextViewTheme"
-        app:layout_constraintTop_toBottomOf="@+id/input_city_edittext"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/no_city_added"
+        android:textSize="@dimen/default_card_text_size"
+        android:layout_gravity="center"
         android:visibility="gone"/>
 
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

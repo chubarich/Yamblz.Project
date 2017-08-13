@@ -1,0 +1,42 @@
+<resources>
+    <string name="enter_city_name">Введите название города</string>
+    <string name="no_cities_found">Не найдено ни одного города</string>
+    <string name="error_no_data">Не удалось получить данные</string>
+
+    <string name="pref_update_time_title">Частота обновлений</string>
+    <string name="pref_city_title">Город</string>
+    <string-array name="pref_update_time_entries">
+        <item>1 час</item>
+        <item>3 часа</item>
+        <item>6 часов</item>
+        <item>12 часов</item>
+        <item>24 часа</item>
+    </string-array>
+
+    <!--navigation drawer-->
+    <string name="navigation_cities_text">Места</string>
+    <string name="navigation_settings_text">Настройки</string>
+    <string name="navigation_about_text">О приложении</string>
+    <string name="navigation_city_selection">Выбор города</string>
+    <string name="navigation_drawer_open">Открыть боковое меню</string>
+    <string name="navigation_drawer_close">Закрыть боковое меню</string>
+
+    <!--AboutFragment-->
+    <string name="text_about_app">
+        Это учебное приложение, разрабатываемое в рамках проекта \"Мобилизация\"
+    </string>
+
+    <string name="pressure_label">Давление</string>
+    <string name="humidity_label">Влажность</string>
+    <string name="no_city_added">Не добавлено ни одного города</string>
+    <string name="format_pressure">%s кПа</string>
+    <string name="format_wind">%s м/с</string>
+    <string name="wind_label">Ветер</string>
+    <string name="day_label">День</string>
+    <string name="evening_label">Вечер</string>
+    <string name="morning_label">Утро</string>
+    <string name="night_label">Ночь</string>
+    <string name="today">Сегодня</string>
+    <string name="tomorrow">Завтра</string>
+    <string name="yandex_logo_content_descr">Логотип Яндекса</string>
+</resources>

@@ -1,5 +1,8 @@
 package ru.karapetiandav.yamblzproject.data.job;
 
+import android.content.Context;
+import android.preference.PreferenceManager;
+
 import com.evernote.android.job.Job;
 import com.evernote.android.job.JobCreator;
 
@@ -14,13 +17,17 @@ public class SyncWeatherJobCreator implements JobCreator {
 
     @Inject PreferenceHelper preferenceHelper;
     @Inject NetworkHelper networkHelper;
+    @Inject Context context;
 
     @Override
     public Job create(String tag) {
         App.getAppComponent().inject(this);
         switch (tag) {
             case SyncWeatherJob.TAG:
-                return new SyncWeatherJob(preferenceHelper, networkHelper);
+                SyncWeatherJob job =  new SyncWeatherJob(
+                        preferenceHelper, networkHelper, context.getResources());
+                job.schedulePeriodicJob(PreferenceManager.getDefaultSharedPreferences(context));
+                return job;
             default:
                 return null;
         }
