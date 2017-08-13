@@ -52,7 +52,7 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
     private void loadCityWeathers() {
         disposeOnDetach(subscribeOnCityWeathersUseCase.execute()
                 .observeOn(rxSchedulers.getMainThreadScheduler())
-                .doOnSubscribe(ignore -> getView().showLoading())
+                .doOnNext(ignore -> getView().showLoading())
                 .subscribeOn(rxSchedulers.getIOScheduler())
                 .observeOn(rxSchedulers.getMainThreadScheduler())
                 .subscribe(this::handleSuccess, this::handleError));
@@ -65,6 +65,7 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
 
     private void handleError(Throwable throwable) {
         getView().showError();
+        getView().hideLoading();
     }
 
 

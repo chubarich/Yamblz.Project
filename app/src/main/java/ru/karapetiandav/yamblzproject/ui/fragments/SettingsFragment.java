@@ -17,6 +17,7 @@ public class SettingsFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         titleCallback.setTitle(getString(R.string.navigation_settings_text));
+
     }
 
     @Override
