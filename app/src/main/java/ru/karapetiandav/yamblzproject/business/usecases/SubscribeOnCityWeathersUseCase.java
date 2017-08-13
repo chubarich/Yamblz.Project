@@ -1,4 +1,4 @@
-package ru.karapetiandav.yamblzproject.business;
+package ru.karapetiandav.yamblzproject.business.usecases;
 
 
 import io.reactivex.Observable;

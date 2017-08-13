@@ -10,7 +10,7 @@ public interface CitiesView {
 //    void showCities(Day<CityWeatherViewModel> cities);
     void showLoading();
     void hideLoading();
-    void showError(boolean show);
+    void showError();
     void showAddNewCity();
     void showWeatherActivity(CityViewModel city);
     void showCity(CityWeatherViewModel city);

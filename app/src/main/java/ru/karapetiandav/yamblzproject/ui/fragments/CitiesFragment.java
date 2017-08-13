@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -144,8 +145,8 @@ public class CitiesFragment extends Fragment implements CitiesView {
     }
 
     @Override
-    public void showError(boolean show) {
-
+    public void showError() {
+        Toast.makeText(getActivity(), R.string.error_no_data, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -14,6 +14,7 @@ import java.util.List;
 import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
 import ru.karapetiandav.yamblzproject.TestDataDependencies;
+import ru.karapetiandav.yamblzproject.business.usecases.GetCitiesMatchesUseCase;
 import ru.karapetiandav.yamblzproject.data.repositories.CitiesRepository;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.utils.mappers.CityMapper;

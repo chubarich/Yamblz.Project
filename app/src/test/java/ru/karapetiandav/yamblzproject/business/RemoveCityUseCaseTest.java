@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoRule;
 import io.reactivex.Completable;
 import io.reactivex.observers.TestObserver;
 import ru.karapetiandav.yamblzproject.TestDataDependencies;
+import ru.karapetiandav.yamblzproject.business.usecases.RemoveCityUseCase;
 import ru.karapetiandav.yamblzproject.data.repositories.CitiesRepository;
 
 import static org.mockito.Mockito.when;

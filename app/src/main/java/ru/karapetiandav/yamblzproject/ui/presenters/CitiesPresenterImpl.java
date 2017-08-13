@@ -1,8 +1,8 @@
 package ru.karapetiandav.yamblzproject.ui.presenters;
 
 
-import ru.karapetiandav.yamblzproject.business.RemoveCityUseCase;
-import ru.karapetiandav.yamblzproject.business.SubscribeOnCityWeathersUseCase;
+import ru.karapetiandav.yamblzproject.business.usecases.RemoveCityUseCase;
+import ru.karapetiandav.yamblzproject.business.usecases.SubscribeOnCityWeathersUseCase;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.entities.CityWeatherViewModel;
 import ru.karapetiandav.yamblzproject.ui.views.CitiesView;
@@ -64,7 +64,7 @@ public class CitiesPresenterImpl extends BasePresenter<CitiesView>
     }
 
     private void handleError(Throwable throwable) {
-        throwable.printStackTrace();
+        getView().showError();
     }
 
 

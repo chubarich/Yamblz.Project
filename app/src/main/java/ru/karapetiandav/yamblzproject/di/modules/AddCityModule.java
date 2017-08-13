@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.karapetiandav.yamblzproject.business.ChooseCityUseCase;
-import ru.karapetiandav.yamblzproject.business.GetCitiesMatchesUseCase;
+import ru.karapetiandav.yamblzproject.business.usecases.ChooseCityUseCase;
+import ru.karapetiandav.yamblzproject.business.usecases.GetCitiesMatchesUseCase;
 import ru.karapetiandav.yamblzproject.data.repositories.CitiesRepository;
 import ru.karapetiandav.yamblzproject.di.scopes.AddCityScope;
 import ru.karapetiandav.yamblzproject.ui.adapters.AddCityAdapter;

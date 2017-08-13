@@ -2,7 +2,7 @@ package ru.karapetiandav.yamblzproject.ui.presenters;
 
 import java.util.List;
 
-import ru.karapetiandav.yamblzproject.business.GetForecastUseCase;
+import ru.karapetiandav.yamblzproject.business.usecases.GetForecastUseCase;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.entities.WeatherViewModel;
 import ru.karapetiandav.yamblzproject.ui.views.WeatherView;
@@ -30,12 +30,12 @@ public class WeatherPresenterImpl extends BasePresenter<WeatherView>
     }
 
     private void loadWeather() {
-        disposeOnDetach((getForecastUseCase.execute(city.getCityId())
+        disposeOnDetach(getForecastUseCase.execute(city.getCityId())
                 .observeOn(schedulers.getMainThreadScheduler())
                 .doAfterTerminate(getView()::hideLoading)
                 .subscribeOn(schedulers.getIOScheduler())
                 .observeOn(schedulers.getMainThreadScheduler())
-                .subscribe(this::handleSuccess, this::handleError)));
+                .subscribe(this::handleSuccess, this::handleError));
     }
 
     private void handleSuccess(List<WeatherViewModel> weatherList) {

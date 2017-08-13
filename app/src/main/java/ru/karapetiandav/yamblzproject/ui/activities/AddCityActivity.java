@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -31,6 +32,8 @@ import ru.karapetiandav.yamblzproject.ui.presenters.AddCityPresenter;
 import ru.karapetiandav.yamblzproject.ui.views.AddCityView;
 
 public class AddCityActivity extends AppCompatActivity implements AddCityView {
+
+    private final static int DEBOUNCE_BEFORE_QUERING_DATA = 500;
 
     @Inject
     AddCityAdapter adapter;
@@ -59,7 +62,8 @@ public class AddCityActivity extends AppCompatActivity implements AddCityView {
     protected void onResume() {
         super.onResume();
         presenter.onAttach(this);
-        presenter.observeInputChanges(RxTextView.textChanges(inputCityET).skipInitialValue());
+        presenter.observeInputChanges(RxTextView.textChanges(inputCityET).skipInitialValue()
+                .debounce(DEBOUNCE_BEFORE_QUERING_DATA, TimeUnit.MILLISECONDS));
     }
 
     private void setupToolbar() {
@@ -87,8 +91,6 @@ public class AddCityActivity extends AppCompatActivity implements AddCityView {
         yandexLogo.setVisibility(View.GONE);
         adapter.changeDataSet(cities);
     }
-
-
 
     @Override
     protected void onPause() {

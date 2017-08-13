@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.karapetiandav.yamblzproject.business.RemoveCityUseCase;
-import ru.karapetiandav.yamblzproject.business.SubscribeOnCityWeathersUseCase;
+import ru.karapetiandav.yamblzproject.business.usecases.RemoveCityUseCase;
+import ru.karapetiandav.yamblzproject.business.usecases.SubscribeOnCityWeathersUseCase;
 import ru.karapetiandav.yamblzproject.data.repositories.CitiesRepository;
 import ru.karapetiandav.yamblzproject.data.repositories.WeatherRepository;
 import ru.karapetiandav.yamblzproject.di.scopes.CitiesScope;
