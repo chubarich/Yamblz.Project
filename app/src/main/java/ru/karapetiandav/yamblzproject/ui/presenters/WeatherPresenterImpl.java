@@ -2,7 +2,7 @@ package ru.karapetiandav.yamblzproject.ui.presenters;
 
 import java.util.List;
 
-import ru.karapetiandav.yamblzproject.business.weather.GetForecastUseCase;
+import ru.karapetiandav.yamblzproject.business.GetForecastUseCase;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.entities.WeatherViewModel;
 import ru.karapetiandav.yamblzproject.ui.views.WeatherView;

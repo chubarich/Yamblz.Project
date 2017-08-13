@@ -10,7 +10,8 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import ru.karapetiandav.yamblzproject.business.addcity.AddCityInteractor;
+import ru.karapetiandav.yamblzproject.business.ChooseCityUseCase;
+import ru.karapetiandav.yamblzproject.business.GetCitiesMatchesUseCase;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.views.AddCityView;
 import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;
@@ -20,16 +21,19 @@ public class AddCityPresenterImpl extends BasePresenter<AddCityView>
 
     private final static int DEBOUNCE_BEFORE_QUERING_DATA = 500;
 
-    private AddCityInteractor addCityInteractor;
+    private GetCitiesMatchesUseCase getCitiesMatchesUseCase;
+    private ChooseCityUseCase chooseCityUseCase;
     private AddCityPresenterCache cache;
     private RxSchedulers schedulers;
 
     private AddCityView view;
 
-    public AddCityPresenterImpl(AddCityInteractor addCityInteractor,
+    public AddCityPresenterImpl(GetCitiesMatchesUseCase getCitiesMatchesUseCase,
+                                ChooseCityUseCase chooseCityUseCase,
                                 AddCityPresenterCache cache,
                                 RxSchedulers schedulers) {
-        this.addCityInteractor = addCityInteractor;
+        this.getCitiesMatchesUseCase = getCitiesMatchesUseCase;
+        this.chooseCityUseCase = chooseCityUseCase;
         this.cache = cache;
         this.schedulers = schedulers;
     }
@@ -55,7 +59,7 @@ public class AddCityPresenterImpl extends BasePresenter<AddCityView>
                 .doOnNext(this::handleText)
                 .debounce(DEBOUNCE_BEFORE_QUERING_DATA, TimeUnit.MILLISECONDS)
                 .observeOn(schedulers.getIOScheduler())
-                .flatMap(addCityInteractor::getCitiesMatches)
+                .flatMap(getCitiesMatchesUseCase::execute)
                 .observeOn(schedulers.getMainThreadScheduler())
                 .doAfterNext(ignore -> view.hideProgress())
                 .doAfterTerminate(view::hideProgress)
@@ -89,7 +93,7 @@ public class AddCityPresenterImpl extends BasePresenter<AddCityView>
 
     @Override
     public void onCityClick(@NonNull CityViewModel city) {
-        addCityInteractor.chooseCity(city)
+        chooseCityUseCase.execute(city)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(view::close, Throwable::printStackTrace);

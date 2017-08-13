@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.karapetiandav.yamblzproject.business.addcity.AddCityInteractor;
-import ru.karapetiandav.yamblzproject.business.addcity.AddCityInteractorImpl;
+import ru.karapetiandav.yamblzproject.business.ChooseCityUseCase;
+import ru.karapetiandav.yamblzproject.business.GetCitiesMatchesUseCase;
 import ru.karapetiandav.yamblzproject.data.repositories.CitiesRepository;
 import ru.karapetiandav.yamblzproject.di.scopes.AddCityScope;
 import ru.karapetiandav.yamblzproject.ui.adapters.AddCityAdapter;
@@ -20,13 +20,28 @@ import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;
 @Module
 public class AddCityModule {
 
-    @Provides
     @AddCityScope
+    @Provides
     @NonNull
-    AddCityPresenter<AddCityView> provideAddCityPresenter(AddCityInteractor interactor,
+    AddCityPresenter<AddCityView> provideAddCityPresenter(GetCitiesMatchesUseCase getMatchesUseCase,
+                                                          ChooseCityUseCase chooseCityuseCase,
                                                           AddCityPresenterCache cache,
                                                           RxSchedulers schedulers) {
-        return new AddCityPresenterImpl(interactor, cache, schedulers);
+        return new AddCityPresenterImpl(getMatchesUseCase, chooseCityuseCase, cache, schedulers);
+    }
+
+    @AddCityScope
+    @Provides
+    @NonNull
+    ChooseCityUseCase provideChooseCityUseCase(CitiesRepository repo, CityMapper mapper) {
+        return new ChooseCityUseCase(repo, mapper);
+    }
+
+    @AddCityScope
+    @Provides
+    @NonNull
+    GetCitiesMatchesUseCase provideMatchesUseCase(CitiesRepository repo, CityMapper mapper) {
+        return new GetCitiesMatchesUseCase(repo, mapper);
     }
 
     @Provides
@@ -34,13 +49,6 @@ public class AddCityModule {
     @NonNull
     AddCityAdapter provideAddCityAdapter(Context context) {
         return new AddCityAdapter(context);
-    }
-
-    @Provides
-    @AddCityScope
-    @NonNull
-    AddCityInteractor addCityInteractor(CitiesRepository repository, CityMapper mapper) {
-        return new AddCityInteractorImpl(repository, mapper);
     }
 
     @Provides

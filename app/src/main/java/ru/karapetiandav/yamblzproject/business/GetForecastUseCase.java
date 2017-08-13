@@ -1,4 +1,4 @@
-package ru.karapetiandav.yamblzproject.business.weather;
+package ru.karapetiandav.yamblzproject.business;
 
 
 import java.util.List;

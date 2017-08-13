@@ -1,4 +1,4 @@
-package ru.karapetiandav.yamblzproject.business.cities;
+package ru.karapetiandav.yamblzproject.business;
 
 
 import io.reactivex.Observable;
@@ -6,32 +6,27 @@ import ru.karapetiandav.yamblzproject.data.repositories.CitiesRepository;
 import ru.karapetiandav.yamblzproject.data.repositories.WeatherRepository;
 import ru.karapetiandav.yamblzproject.ui.entities.CityWeatherViewModel;
 import ru.karapetiandav.yamblzproject.utils.mappers.CityWeatherMapper;
-import ru.karapetiandav.yamblzproject.utils.rx.RxSchedulers;
 
-public class CitiesInteractorImpl implements CitiesInteractor {
+public class SubscribeOnCityWeathersUseCase{
 
     private CitiesRepository citiesRepository;
     private WeatherRepository weatherRepository;
-    private RxSchedulers schedulers;
     private CityWeatherMapper mapper;
 
 
-    public CitiesInteractorImpl(CitiesRepository citiesRepository,
-                                WeatherRepository weatherRepository,
-                                RxSchedulers schedulers,
-                                CityWeatherMapper mapper) {
+    public SubscribeOnCityWeathersUseCase(CitiesRepository citiesRepository,
+                                          WeatherRepository weatherRepository,
+                                          CityWeatherMapper mapper) {
         this.citiesRepository = citiesRepository;
         this.weatherRepository = weatherRepository;
-        this.schedulers = schedulers;
         this.mapper = mapper;
     }
 
-    @Override
-    public Observable<CityWeatherViewModel> subscribeOnCityWeathers() {
+    public Observable<CityWeatherViewModel> execute() {
         return citiesRepository.subscribeOnCities()
                 .flatMap(Observable::fromIterable)
                 .flatMap(city -> weatherRepository.getCurrentWeather(city)
                         .toObservable()
-                        .map(currentWeather -> mapper.getCityWeatherViewModel(city, currentWeather)));
+                        .map(weather -> mapper.getCityWeatherViewModel(city, weather)));
     }
 }

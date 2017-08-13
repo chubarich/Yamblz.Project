@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.karapetiandav.yamblzproject.business.weather.GetForecastUseCase;
+import ru.karapetiandav.yamblzproject.business.GetForecastUseCase;
 import ru.karapetiandav.yamblzproject.data.repositories.CitiesRepository;
 import ru.karapetiandav.yamblzproject.data.repositories.WeatherRepository;
 import ru.karapetiandav.yamblzproject.di.scopes.WeatherScope;
