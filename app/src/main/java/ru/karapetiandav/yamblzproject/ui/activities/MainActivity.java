@@ -11,28 +11,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.karapetiandav.yamblzproject.R;
 import ru.karapetiandav.yamblzproject.ui.callbacks.TitleCallback;
-import ru.karapetiandav.yamblzproject.ui.fragments.AboutFragment;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
+import ru.karapetiandav.yamblzproject.ui.fragments.AboutFragment;
 import ru.karapetiandav.yamblzproject.ui.fragments.CitiesFragment;
 import ru.karapetiandav.yamblzproject.ui.fragments.SettingsFragment;
 import ru.karapetiandav.yamblzproject.ui.fragments.WeatherFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CitiesFragment.OnCitySelected, TitleCallback {
+        implements NavigationView.OnNavigationItemSelectedListener, CitiesFragment.OnCitySelected,
+        TitleCallback {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
-    @BindView(R.id.toolbar)
+    @BindView(R.id.toolbar_add_city)
     Toolbar toolbar;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
     private FragmentManager fragmentManager = getFragmentManager();
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +43,37 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        boolean isTablet = getResources().getBoolean(R.bool.isTablet);
-
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        getFragmentManager().addOnBackStackChangedListener(() -> {
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                toggle.setDrawerIndicatorEnabled(false);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);// show back button
+                toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onBackPressed();
+                    }
+                });
+            } else {
+                //show hamburger
+                toggle.setDrawerIndicatorEnabled(true);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                toggle.syncState();
+                toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
+                });
+            }
+        });
+
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -100,6 +126,7 @@ public class MainActivity extends AppCompatActivity
         fragmentManager
                 .beginTransaction()
                 .replace(R.id.container, fragment)
+                .addToBackStack(null)
                 .commit();
         item.setChecked(true);
         setTitle(item.getTitle());

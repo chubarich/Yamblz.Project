@@ -22,9 +22,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ru.karapetiandav.yamblzproject.App;
 import ru.karapetiandav.yamblzproject.R;
-import ru.karapetiandav.yamblzproject.di.modules.AddCityModule;
 import ru.karapetiandav.yamblzproject.ui.adapters.AddCityAdapter;
 import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 import ru.karapetiandav.yamblzproject.ui.presenters.AddCityPresenter;
@@ -50,7 +48,6 @@ public class AddCityFragment extends Fragment implements AddCityView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        App.getAppComponent().plusAddCityComponent(new AddCityModule()).inject(this);
     }
 
     @Nullable

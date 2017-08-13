@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".ui.activities.AddCityActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="ui.cities.AddCityActivity" />
                 <category android:name="android.intent.category.DEFAULT" />

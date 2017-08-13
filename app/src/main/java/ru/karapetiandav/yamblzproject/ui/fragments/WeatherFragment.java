@@ -61,11 +61,7 @@ public class WeatherFragment extends Fragment implements WeatherView {
     @SuppressWarnings("deprecation")
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-            titleCallback = (TitleCallback) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity + " must implement TitleCallback");
-        }
+        titleCallback = (TitleCallback) activity;
     }
 
     @Override
