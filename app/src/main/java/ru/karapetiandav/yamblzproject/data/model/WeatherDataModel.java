@@ -27,4 +27,17 @@ public class WeatherDataModel {
     public String getCityId() {
         return cityId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        WeatherDataModel that = (WeatherDataModel) o;
+
+        if (getWeatherId() != that.getWeatherId()) return false;
+        if (Double.compare(that.getTemp(), getTemp()) != 0) return false;
+        return getCityId() != null ? getCityId().equals(that.getCityId()) : that.getCityId() == null;
+
+    }
 }

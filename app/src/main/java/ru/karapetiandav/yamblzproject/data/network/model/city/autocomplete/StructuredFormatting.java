@@ -21,4 +21,11 @@ public class StructuredFormatting {
         return secondaryText;
     }
 
+    public void setMainText(String mainText) {
+        this.mainText = mainText;
+    }
+
+    public void setSecondaryText(String secondaryText) {
+        this.secondaryText = secondaryText;
+    }
 }

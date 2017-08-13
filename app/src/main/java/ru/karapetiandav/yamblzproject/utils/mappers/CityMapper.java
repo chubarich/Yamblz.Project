@@ -15,7 +15,7 @@ import ru.karapetiandav.yamblzproject.ui.entities.CityViewModel;
 
 public class CityMapper {
 
-    private static final float NO_COORDS = 0f;
+    private static final double NO_COORDS = 0d;
 
     public List<CityDataModel> getCitiesFromResponse(CitiesResponse response) {
         List<CityDataModel> cityDataModels = new ArrayList<>();
@@ -63,7 +63,7 @@ public class CityMapper {
 
     public CityDataModel getCityDataModel(CityViewModel viewModel) {
         return new CityDataModel(viewModel.getCityId(), viewModel.getCityName(),
-                viewModel.getCountry(), 0f, 0f);
+                viewModel.getCountry(), 0d, 0d);
     }
 
 }

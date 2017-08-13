@@ -39,4 +39,21 @@ public class CityDataModel {
     public double getLon() {
         return lon;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CityDataModel that = (CityDataModel) o;
+
+        if (Double.compare(that.getLat(), getLat()) != 0) return false;
+        if (Double.compare(that.getLon(), getLon()) != 0) return false;
+        if (getCityId() != null ? !getCityId().equals(that.getCityId()) : that.getCityId() != null)
+            return false;
+        if (getCity() != null ? !getCity().equals(that.getCity()) : that.getCity() != null)
+            return false;
+        return getCountry() != null ? getCountry().equals(that.getCountry()) : that.getCountry() == null;
+
+    }
 }

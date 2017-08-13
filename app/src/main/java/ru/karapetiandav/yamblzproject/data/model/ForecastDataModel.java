@@ -175,4 +175,27 @@ public class ForecastDataModel {
                     humidity, speed, deg, cityId);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ForecastDataModel that = (ForecastDataModel) o;
+
+        if (getDate() != that.getDate()) return false;
+        if (getWeatherId() != that.getWeatherId()) return false;
+        if (Double.compare(that.getMin(), getMin()) != 0) return false;
+        if (Double.compare(that.getMax(), getMax()) != 0) return false;
+        if (Double.compare(that.getMorn(), getMorn()) != 0) return false;
+        if (Double.compare(that.getDay(), getDay()) != 0) return false;
+        if (Double.compare(that.getEve(), getEve()) != 0) return false;
+        if (Double.compare(that.getNight(), getNight()) != 0) return false;
+        if (Double.compare(that.getPressure(), getPressure()) != 0) return false;
+        if (Double.compare(that.getHumidity(), getHumidity()) != 0) return false;
+        if (Double.compare(that.getSpeed(), getSpeed()) != 0) return false;
+        if (Double.compare(that.getDeg(), getDeg()) != 0) return false;
+        return getCityId() != null ? getCityId().equals(that.getCityId()) : that.getCityId() == null;
+
+    }
 }

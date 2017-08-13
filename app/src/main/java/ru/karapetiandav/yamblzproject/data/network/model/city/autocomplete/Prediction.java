@@ -18,4 +18,11 @@ public class Prediction {
         return structuredFormatting;
     }
 
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
+    }
+
+    public void setStructuredFormatting(StructuredFormatting structuredFormatting) {
+        this.structuredFormatting = structuredFormatting;
+    }
 }

@@ -35,21 +35,6 @@ public final class CityViewModel implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CityViewModel viewModel = (CityViewModel) o;
-
-        if (getCityId() != null ? !getCityId().equals(viewModel.getCityId()) : viewModel.getCityId() != null)
-            return false;
-        if (getCityName() != null ? !getCityName().equals(viewModel.getCityName()) : viewModel.getCityName() != null)
-            return false;
-        return getCountry() != null ? getCountry().equals(viewModel.getCountry()) : viewModel.getCountry() == null;
-
-    }
-
-    @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(cityId);
         dest.writeString(cityName);
@@ -72,4 +57,19 @@ public final class CityViewModel implements Parcelable {
             return new CityViewModel[size];
         }
     };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CityViewModel that = (CityViewModel) o;
+
+        if (getCityId() != null ? !getCityId().equals(that.getCityId()) : that.getCityId() != null)
+            return false;
+        if (getCityName() != null ? !getCityName().equals(that.getCityName()) : that.getCityName() != null)
+            return false;
+        return getCountry() != null ? getCountry().equals(that.getCountry()) : that.getCountry() == null;
+
+    }
 }

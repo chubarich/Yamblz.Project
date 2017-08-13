@@ -9,4 +9,7 @@ public class CityDetails {
         return result;
     }
 
+    public void setResult(Result result) {
+        this.result = result;
+    }
 }

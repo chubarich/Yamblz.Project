@@ -9,4 +9,7 @@ public class Result {
         return geometry;
     }
 
+    public void setGeometry(Geometry geometry) {
+        this.geometry = geometry;
+    }
 }

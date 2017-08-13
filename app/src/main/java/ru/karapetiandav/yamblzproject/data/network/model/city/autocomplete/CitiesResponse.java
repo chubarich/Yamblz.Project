@@ -11,4 +11,7 @@ public class CitiesResponse {
         return predictions;
     }
 
+    public void setPredictions(List<Prediction> predictions) {
+        this.predictions = predictions;
+    }
 }

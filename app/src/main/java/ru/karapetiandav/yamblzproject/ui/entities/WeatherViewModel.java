@@ -162,4 +162,35 @@ public final class WeatherViewModel {
                     wind, pressure, morningTemp, dayTemp, eveningTemp, nightTemp);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        WeatherViewModel that = (WeatherViewModel) o;
+
+        if (getIconId() != that.getIconId()) return false;
+        if (getColorId() != that.getColorId()) return false;
+        if (getDayOfWeek() != null ? !getDayOfWeek().equals(that.getDayOfWeek()) : that.getDayOfWeek() != null)
+            return false;
+        if (getMaxTemp() != null ? !getMaxTemp().equals(that.getMaxTemp()) : that.getMaxTemp() != null)
+            return false;
+        if (getMinTemp() != null ? !getMinTemp().equals(that.getMinTemp()) : that.getMinTemp() != null)
+            return false;
+        if (getHumidity() != null ? !getHumidity().equals(that.getHumidity()) : that.getHumidity() != null)
+            return false;
+        if (getWind() != null ? !getWind().equals(that.getWind()) : that.getWind() != null)
+            return false;
+        if (getPressure() != null ? !getPressure().equals(that.getPressure()) : that.getPressure() != null)
+            return false;
+        if (getMorningTemp() != null ? !getMorningTemp().equals(that.getMorningTemp()) : that.getMorningTemp() != null)
+            return false;
+        if (getDayTemp() != null ? !getDayTemp().equals(that.getDayTemp()) : that.getDayTemp() != null)
+            return false;
+        if (getEveningTemp() != null ? !getEveningTemp().equals(that.getEveningTemp()) : that.getEveningTemp() != null)
+            return false;
+        return getNightTemp() != null ? getNightTemp().equals(that.getNightTemp()) : that.getNightTemp() == null;
+
+    }
 }
